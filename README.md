@@ -7,25 +7,25 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 
 ## Regras de negócio
-•	Novos registros devem conter todos os campos obrigatórios (name, email, phone, department, role, dateJoined).
+[ ]	Novos registros devem conter todos os campos obrigatórios (name, email, phone, department, role, dateJoined).
 
-•	O campo id deve ser gerado automaticamente ao adicionar um novo registro.
+[ ]	O campo id deve ser gerado automaticamente ao adicionar um novo registro.
 
-•	Qualquer campo de um registro existente pode ser editado, exceto o id.
+[ ]	Qualquer campo de um registro existente pode ser editado, exceto o id.
 
-•	Um registro pode ser excluído apenas se o usuário confirmar a ação (ex: através de um modal de confirmação).
+[ ]	Um registro pode ser excluído apenas se o usuário confirmar a ação (ex: através de um modal de confirmação).
 
-•	A tabela deve permitir filtrar por department e role.
+[ ]	A tabela deve permitir filtrar por department e role.
 
-•	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
+[ ]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
 
-•	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
+[ ]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
 
-•	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
+[ ]	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
 
-•	O CSV deve incluir apenas os registros da página atual se a paginação estiver ativa.
+[ ]	O CSV deve incluir apenas os registros da página atual se a paginação estiver ativa.
 
-•	O sistema deve permitir a busca de registros pelo name, email, ou phone.
+[ ]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
 
 
 ## Referências

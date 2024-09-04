@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { JsonCrudService } from './services/json-crud.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hiring-front-end-angular';
+
+  constructor(protected JsonCrud: JsonCrudService){}
 }

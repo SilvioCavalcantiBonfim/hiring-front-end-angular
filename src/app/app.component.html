@@ -1,0 +1,32 @@
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>email</th>
+    <th>phone</th>
+    <th>department</th>
+    <th>role</th>
+    <th>dateJoined</th>
+    <th>actions</th>
+  </tr>
+  <ng-container *ngTemplateOutlet="main; context: {employees: JsonCrud.read() | async}" />
+  <ng-template #main let-employees="employees.data">
+    <tr *ngFor="let employee of employees">
+      <td>{{employee.id}}</td>
+      <td>{{employee.name}}</td>
+      <td>{{employee.email}}</td>
+      <td>{{employee.phone}}</td>
+      <td>{{employee.department}}</td>
+      <td>{{employee.role}}</td>
+      <td>{{employee.dateJoined}}</td>
+      <td>
+        <button>
+          <span class="material-symbols-outlined">edit</span>
+        </button>
+        <button (click)="JsonCrud.delete(employee.id)">
+          <span class="material-symbols-outlined">delete</span>
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</table>
