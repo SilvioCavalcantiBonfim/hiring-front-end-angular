@@ -8,7 +8,7 @@ import { Employee } from 'src/app/interfaces/employee';
 })
 export class DeleteDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<DeleteDialogComponent>,
+    private dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {employee: Employee}
   ) { }
 

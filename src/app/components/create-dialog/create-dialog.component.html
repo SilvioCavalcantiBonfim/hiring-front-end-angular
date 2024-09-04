@@ -1,7 +1,40 @@
 <h1 mat-dialog-title>Cadastrar novo funcionário</h1>
-<mat-form-field appearance="outline">
-  <mat-label>Outline form field</mat-label>
-  <input matInput placeholder="Placeholder">
-  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-  <mat-hint>Hint</mat-hint>
-</mat-form-field>
+<p>
+  <mat-form-field appearance="outline">
+    <mat-label>Nome</mat-label>
+    <input matInput placeholder="Nome completo..." required>
+    <mat-icon matSuffix>person</mat-icon>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline">
+    <mat-label>E-mail</mat-label>
+    <input matInput placeholder="E-mail..." required>
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline">
+    <mat-label>Contato</mat-label>
+    <input matInput placeholder="Contato..." required>
+    <mat-icon matSuffix>phone</mat-icon>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline">
+    <mat-label>Departamento</mat-label>
+    <input matInput placeholder="Departamento..." required>
+    <mat-icon matSuffix>groups_2</mat-icon>
+  </mat-form-field>
+</p>
+<p>
+  <mat-form-field appearance="outline">
+    <mat-label>Cargo</mat-label>
+    <input matInput placeholder="Cargo..." required>
+    <mat-icon matSuffix>manage_accounts</mat-icon>
+  </mat-form-field>
+</p>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary">Cadastrar</button>
+</div>
