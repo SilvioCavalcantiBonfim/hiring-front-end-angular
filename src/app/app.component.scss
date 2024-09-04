@@ -1,3 +1,17 @@
 .icon{
   margin: 0 !important;
 }
+
+table{
+  max-width: 320px;
+  margin: auto;
+  @media (min-width: 640px) { 
+    max-width: 640px;
+  }
+  @media (min-width: 768px) { 
+    max-width: 768px;
+  }
+  @media (min-width: 1024px) { 
+    max-width: 1024px;
+  }
+}
