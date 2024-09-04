@@ -54,8 +54,8 @@ describe('JsonCrudService', () => {
     service.create(input);
 
     // Assert
-    expect(service['data'].length).toBe(1);
-    expect(service['data'][0]).toEqual(mockEmployee);
+    expect(service['employeeCollection']['data'].length).toBe(1);
+    expect(service['employeeCollection']['data'][0]).toEqual(mockEmployee);
     expect(identifierService.getAndIncrement).toHaveBeenCalled();
   });
 
@@ -65,29 +65,97 @@ describe('JsonCrudService', () => {
 
     // Act
     const actor1: EmployeeInput = {
-      name: 'Alice', 
-      email: 'alice@example.com', 
-      phone: '+1 555-111-1111', 
-      department: 'HR', 
-      role: 'Manager', 
+      name: 'Alice',
+      email: 'alice@example.com',
+      phone: '+1 555-111-1111',
+      department: 'HR',
+      role: 'Manager',
       dateJoined: '2023-09-02'
     }
 
     const actor2: EmployeeInput = {
-      name: 'Bob', 
-      email: 'bob@example.com', 
-      phone: '+1 555-222-2222', 
-      department: 'Finance', 
-      role: 'Analyst', 
+      name: 'Bob',
+      email: 'bob@example.com',
+      phone: '+1 555-222-2222',
+      department: 'Finance',
+      role: 'Analyst',
       dateJoined: '2023-09-03'
     }
     service.create(actor1);
     service.create(actor2);
 
     // Assert
-    expect(service['data'].length).toBe(2);
-    expect(service['data'][0].id).toBe(1);
-    expect(service['data'][1].id).toBe(2);
+    expect(service['employeeCollection']['data'].length).toBe(2);
+    expect(service['employeeCollection']['data'][0].id).toBe(1);
+    expect(service['employeeCollection']['data'][1].id).toBe(2);
     expect(identifierService.getAndIncrement).toHaveBeenCalledTimes(2);
   });
+
+  it('should return a frozen array of employees', () => {
+    // Arrange
+    const employee: Employee = {
+      id: 1,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+1 555-555-5555',
+      department: 'Engineering',
+      role: 'Software Engineer',
+      dateJoined: '2023-09-01'
+    };
+    identifierService.getAndIncrement.and.returnValue(1);
+    // Act
+    service.create({ 
+      name: employee.name, 
+      email: employee.email, 
+      phone: employee.phone, 
+      department: employee.department, 
+      role: employee.role, 
+      dateJoined: employee.dateJoined 
+    });
+    const result = service.show();
+
+    // Assert
+    expect(result).toEqual([employee]);
+    expect(Object.isFrozen(result)).toBeTrue();
+  });
+
+  // Teste de imutabilidade
+  it('should not allow modification of the returned array', () => {
+    // Arrange
+    const employee: Employee = {
+      id: 1,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+1 555-555-5555',
+      department: 'Engineering',
+      role: 'Software Engineer',
+      dateJoined: '2023-09-01'
+    };
+
+    // Act
+    service.create({ 
+      name: employee.name, 
+      email: employee.email, 
+      phone: employee.phone, 
+      department: employee.department, 
+      role: employee.role, 
+      dateJoined: employee.dateJoined 
+    });
+    const result = service.show();
+
+    // Assert
+    expect(() => {
+      (result as Employee[]).push({
+        id: 2,
+        name: 'Jane Smith',
+        email: 'jane.smith@example.com',
+        phone: '+1 555-666-7777',
+        department: 'Marketing',
+        role: 'Marketing Specialist',
+        dateJoined: '2023-09-02'
+      });
+    }).toThrowError(TypeError); // O array não deve permitir a modificação
+  });
+
+  
 });
