@@ -4,27 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatButtonModule} from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatIconModule} from '@angular/material/icon';
-
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { CreateDialogComponent } from './components/create-dialog/create-dialog.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeleteDialogComponent,
-    NavBarComponent
+    NavBarComponent,
+    CreateDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatToolbarModule
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
