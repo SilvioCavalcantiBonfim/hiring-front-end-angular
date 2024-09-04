@@ -1,3 +1,5 @@
+<app-nav-bar [title]="title"/>
+
 <table>
   <tr>
     <th>id</th>
@@ -20,11 +22,11 @@
       <td>{{employee.role}}</td>
       <td>{{employee.dateJoined}}</td>
       <td>
-        <button>
-          <span class="material-symbols-outlined">edit</span>
+        <button mat-icon-button color="primary">
+          <mat-icon class="icon">edit</mat-icon>
         </button>
-        <button (click)="JsonCrud.delete(employee.id)">
-          <span class="material-symbols-outlined">delete</span>
+        <button mat-icon-button color="warn" (click)="openDialog(employee)">
+          <mat-icon class="icon">person_remove</mat-icon>
         </button>
       </td>
     </tr>

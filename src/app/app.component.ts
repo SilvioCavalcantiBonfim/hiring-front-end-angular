@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { JsonCrudService } from './services/json-crud.service';
+import { MatDialog } from '@angular/material/dialog';
+import { Employee } from './interfaces/employee';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +12,15 @@ import { JsonCrudService } from './services/json-crud.service';
 export class AppComponent {
   title = 'hiring-front-end-angular';
 
-  constructor(protected JsonCrud: JsonCrudService){}
+  constructor(protected JsonCrud: JsonCrudService, private dialog: MatDialog) { }
+
+  openDialog(employee: Employee): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      data: { employee: employee }
+    });
+
+    dialogRef.afterClosed().subscribe(id => {
+      if(id) this.JsonCrud.delete(id)
+    });
+  }
 }
