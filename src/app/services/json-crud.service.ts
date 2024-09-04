@@ -2,33 +2,59 @@ import { Injectable } from '@angular/core';
 import { IdentifierService } from './identifier/identifier.service';
 import { Collection } from '../interfaces/collection';
 import { Employee, EmployeeInput, EmployeeUpdateInput } from '../interfaces/employee';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JsonCrudService {
-  
-  private employeeCollection: Collection<Employee> = { data: [] };
-  
+
+  private employeeCollection$: BehaviorSubject<Collection<Employee>> = new BehaviorSubject({ data:[] } as Collection<Employee>);
+
   constructor(private identifier: IdentifierService) { }
-  
+
   create(employee: EmployeeInput): void {
-    const newEmployee = { id: this.identifier.getAndIncrement(), ...employee } as Employee;
-    this.employeeCollection.data.push(newEmployee);
+    const currentCollection = this.employeeCollection$.value;
+    const newEmployee: Employee = { id: this.identifier.getAndIncrement(), ...employee };
+  
+    const updatedCollection = {
+      ...currentCollection,
+      data: [...currentCollection.data, newEmployee]
+    };
+  
+    this.employeeCollection$.next(updatedCollection);
   }
   
-  show(): readonly Employee[]{
-    return Object.freeze<Employee[]>(this.employeeCollection.data);
+
+  read(): Observable<Collection<Employee>> {
+    return this.employeeCollection$.asObservable();
   }
+
+  update(id: number, updatedData: EmployeeUpdateInput): void {
+    const currentCollection = this.employeeCollection$.value;
+    const employeeIndex = currentCollection.data.findIndex(emp => emp.id === id);
   
-  delete(id: number): boolean{
-    const initialLength = this.employeeCollection.data.length;
-    this.employeeCollection.data = this.employeeCollection.data.filter(employee => employee.id != id);
-    return initialLength > this.employeeCollection.data.length;
+    if (employeeIndex === -1) return;
+  
+    const updatedEmployee = { ...currentCollection.data[employeeIndex], ...updatedData };
+    const updatedDataArray = [
+      ...currentCollection.data.slice(0, employeeIndex),
+      updatedEmployee,
+      ...currentCollection.data.slice(employeeIndex + 1)
+    ];
+  
+    this.employeeCollection$.next({ ...currentCollection, data: updatedDataArray });
   }
-  
-  update(id: number, updatedData: EmployeeUpdateInput) {
-    throw new Error('Method not implemented.');
+
+  delete(id: number): void {
+    const currentCollection = this.employeeCollection$.value;
+
+    const updatedCollection = {
+      ...currentCollection,
+      data: currentCollection.data.filter(employee => employee.id != id)
+    };
+
+    this.employeeCollection$.next(updatedCollection);
   }
 
 }

@@ -1,247 +1,107 @@
 import { TestBed } from '@angular/core/testing';
-import { JsonCrudService } from './json-crud.service';
-import { IdentifierService } from './identifier/identifier.service';
-import { Employee, EmployeeInput } from '../interfaces/employee';
+import { BehaviorSubject } from 'rxjs';
+import { JsonCrudService } from './json-crud.service'; // Atualize o caminho conforme necessário
+import { Employee, EmployeeInput, EmployeeUpdateInput } from '../interfaces/employee'; // Atualize o caminho conforme necessário
+import { Collection } from '../interfaces/collection'; // Atualize o caminho conforme necessário
+import { IdentifierService } from './identifier/identifier.service'; // Atualize o caminho conforme necessário
 
 describe('JsonCrudService', () => {
   let service: JsonCrudService;
-  let identifierService: jasmine.SpyObj<IdentifierService>;
+  let mockIdentifierService: jasmine.SpyObj<IdentifierService>;
 
   beforeEach(() => {
-    const identifierSpy = jasmine.createSpyObj('IdentifierService', ['getAndIncrement']);
-
+    mockIdentifierService = jasmine.createSpyObj('IdentifierService', ['getAndIncrement']);
     TestBed.configureTestingModule({
       providers: [
         JsonCrudService,
-        { provide: IdentifierService, useValue: identifierSpy }
+        { provide: IdentifierService, useValue: mockIdentifierService }
       ]
     });
-
     service = TestBed.inject(JsonCrudService);
-    identifierService = TestBed.inject(IdentifierService) as jasmine.SpyObj<IdentifierService>;
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('should create an employee and add it to the data array', () => {
+  it('should create an employee and update the collection', () => {
     // Arrange
-    const mockId = 1;
-    const mockEmployee: Employee = {
-      id: mockId,
+    const employeeInput: EmployeeInput = {
       name: 'John Doe',
       email: 'john.doe@example.com',
       phone: '+1 555-555-5555',
       department: 'Engineering',
-      role: 'Software Engineer',
-      dateJoined: '2023-09-01'
+      role: 'Developer',
+      dateJoined: '2024-01-01'
     };
+    const newId = 1;
+    mockIdentifierService.getAndIncrement.and.returnValue(newId);
 
-    identifierService.getAndIncrement.and.returnValue(mockId);
-
-    const input: EmployeeInput = {
-      name: mockEmployee.name,
-      email: mockEmployee.email,
-      phone: mockEmployee.phone,
-      department: mockEmployee.department,
-      role: mockEmployee.role,
-      dateJoined: mockEmployee.dateJoined
-    }
-
-    // Act
-    service.create(input);
-
-    // Assert
-    expect(service['employeeCollection']['data'].length).toBe(1);
-    expect(service['employeeCollection']['data'][0]).toEqual(mockEmployee);
-    expect(identifierService.getAndIncrement).toHaveBeenCalled();
-  });
-
-  it('should generate unique IDs for each employee', () => {
-    // Arrange
-    identifierService.getAndIncrement.and.returnValues(1, 2, 3);
-
-    // Act
-    const actor1: EmployeeInput = {
-      name: 'Alice',
-      email: 'alice@example.com',
-      phone: '+1 555-111-1111',
-      department: 'HR',
-      role: 'Manager',
-      dateJoined: '2023-09-02'
-    }
-
-    const actor2: EmployeeInput = {
-      name: 'Bob',
-      email: 'bob@example.com',
-      phone: '+1 555-222-2222',
-      department: 'Finance',
-      role: 'Analyst',
-      dateJoined: '2023-09-03'
-    }
-    service.create(actor1);
-    service.create(actor2);
-
-    // Assert
-    expect(service['employeeCollection']['data'].length).toBe(2);
-    expect(service['employeeCollection']['data'][0].id).toBe(1);
-    expect(service['employeeCollection']['data'][1].id).toBe(2);
-    expect(identifierService.getAndIncrement).toHaveBeenCalledTimes(2);
-  });
-
-  it('should return a frozen array of employees', () => {
-    // Arrange
-    const employee: Employee = {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 555-555-5555',
-      department: 'Engineering',
-      role: 'Software Engineer',
-      dateJoined: '2023-09-01'
-    };
-    
-    service['employeeCollection']['data'] = [employee];
-    
-    const result = service.show();
-
-    // Assert
-    expect(result).toEqual([employee]);
-    expect(Object.isFrozen(result)).toBeTrue();
-  });
-
-  // Teste de imutabilidade
-  it('should not allow modification of the returned array', () => {
-    // Arrange
-    const employee: Employee = {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 555-555-5555',
-      department: 'Engineering',
-      role: 'Software Engineer',
-      dateJoined: '2023-09-01'
+    const expectedCollection: Collection<Employee> = {
+      data: [{
+        id: newId,
+        ...employeeInput
+      }]
     };
 
     // Act
-    service['employeeCollection']['data'] = [employee];
-
-    const result = service.show();
+    service.create(employeeInput);
 
     // Assert
-    expect(() => {
-      (result as Employee[]).push({
-        id: 2,
-        name: 'Jane Smith',
-        email: 'jane.smith@example.com',
-        phone: '+1 555-666-7777',
-        department: 'Marketing',
-        role: 'Marketing Specialist',
-        dateJoined: '2023-09-02'
-      });
-    }).toThrowError(TypeError); // O array não deve permitir a modificação
+    service.read().subscribe(collection => {
+      expect(collection).toEqual(expectedCollection);
+    });
   });
 
-  it('should delete an employee by id', () => {
+  it('should return the current employee collection as observable', () => {
     // Arrange
-    const employee1: Employee = {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 555-555-5555',
-      department: 'Engineering',
-      role: 'Software Engineer',
-      dateJoined: '2023-09-01'
-    };
-
-    const employee2: Employee = {
-      id: 2,
-      name: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      phone: '+1 555-666-7777',
-      department: 'Marketing',
-      role: 'Marketing Specialist',
-      dateJoined: '2023-09-02'
-    };
-
-    service['employeeCollection']['data'] = [employee1, employee2];
+    const initialCollection: Collection<Employee> = { data: [] };
+    const employeeCollection$ = new BehaviorSubject<Collection<Employee>>(initialCollection);
+    (service as any).employeeCollection$ = employeeCollection$;
 
     // Act
-    const result = service.delete(employee1.id);
+    const result$ = service.read();
 
     // Assert
-    expect(result).toBeTrue(); // Verifica que o funcionário foi deletado
-    expect(service.show()).toEqual([employee2]); // Verifica que o funcionário restante é o correto
+    result$.subscribe(result => {
+      expect(result).toEqual(initialCollection);
+    });
   });
 
-  // Teste de tentativa de deletar um ID inexistente
-  it('should return false when trying to delete an employee that does not exist', () => {
+  it('should delete an employee by id and update the collection', () => {
     // Arrange
-    const employee: Employee = {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 555-555-5555',
-      department: 'Engineering',
-      role: 'Software Engineer',
-      dateJoined: '2023-09-01'
-    };
+    const employee1: Employee = { id: 1, name: 'John Doe', email: 'john.doe@example.com', phone: '+1 555-555-5555', department: 'Engineering', role: 'Developer', dateJoined: '2024-01-01' };
+    const employee2: Employee = { id: 2, name: 'Jane Doe', email: 'jane.doe@example.com', phone: '+1 555-555-5555', department: 'Engineering', role: 'Developer', dateJoined: '2024-01-01' };
+    const initialCollection: Collection<Employee> = { data: [employee1, employee2] };
+    const expectedCollection: Collection<Employee> = { data: [employee2] };
+    const idToDelete = 1;
 
-    
-    service['employeeCollection']['data'] = [employee];
+    const employeeCollection$ = new BehaviorSubject<Collection<Employee>>(initialCollection);
+    (service as any).employeeCollection$ = employeeCollection$;
 
     // Act
-    const result = service.delete(999); // ID que não existe
+    service.delete(idToDelete);
 
     // Assert
-    expect(result).toBeFalse(); // Verifica que o retorno é falso
-    expect(service.show()).toEqual([employee]); // Verifica que o funcionário ainda está presente
+    service.read().subscribe(collection => {
+      expect(collection).toEqual(expectedCollection);
+    });
   });
 
-  it('should update an employee by id', () => {
+  it('should update an employee by id and update the collection', () => {
     // Arrange
-    const employee: Employee = {
-      id: 1,
-      name: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 555-555-5555',
-      department: 'Engineering',
-      role: 'Software Engineer',
-      dateJoined: '2023-09-01'
-    };
+    const initialEmployee: Employee = { id: 1, name: 'John Doe', email: 'john.doe@example.com', phone: '+1 555-555-5555', department: 'Engineering', role: 'Developer', dateJoined: '2024-01-01' };
+    const updatedData: EmployeeUpdateInput = { email: 'new.email@example.com' };
+    const updatedEmployee: Employee = { ...initialEmployee, ...updatedData };
+    const initialCollection: Collection<Employee> = { data: [initialEmployee] };
+    const expectedCollection: Collection<Employee> = { data: [updatedEmployee] };
+    const idToUpdate = 1;
 
-    const updatedData = {
-      name: 'John Smith',
-      email: 'john.smith@example.com',
-      phone: '+1 555-555-5556'
-    };
+    const employeeCollection$ = new BehaviorSubject<Collection<Employee>>(initialCollection);
+    (service as any).employeeCollection$ = employeeCollection$;
 
     // Act
-    const result = service.update(employee.id, updatedData);
+    service.update(idToUpdate, updatedData);
 
     // Assert
-    expect(result).toBeTrue(); // Verifica que a atualização foi bem-sucedida
-    const updatedEmployee = service.show().find(emp => emp.id === employee.id);
-    expect(updatedEmployee).toEqual({
-      ...employee,
-      ...updatedData
-    }); // Verifica se o funcionário foi atualizado corretamente
-  });
-
-  // Teste de tentativa de atualizar um ID inexistente
-  it('should return false when trying to update an employee that does not exist', () => {
-    // Arrange
-    const updatedData = {
-      name: 'Nonexistent Employee',
-      email: 'nonexistent@example.com'
-    };
-
-    // Act
-    const result = service.update(999, updatedData); // ID que não existe
-
-    // Assert
-    expect(result).toBeFalse(); // Verifica que o retorno é falso
-    expect(service.show()).toEqual([]); // Verifica que o array de funcionários está vazio
+    service.read().subscribe(collection => {
+      expect(collection).toEqual(expectedCollection);
+    });
   });
 });
