@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { IdentifierService } from './identifier/identifier.service';
 import { Employee } from '../types/employee.type';
 import { EmployeeInput } from '../types/employeeInput.type';
-import { Collection } from '../types/Collection.type';
+import { Collection } from '../types/collection.type';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +22,11 @@ export class JsonCrudService {
     return Object.freeze<Employee[]>(this.employeeCollection.data);
   }
 
-  
+  delete(id: number): boolean{
+    const initialLength = this.employeeCollection.data.length;
+    this.employeeCollection.data = this.employeeCollection.data.filter(employee => employee.id != id);
+    return initialLength > this.employeeCollection.data.length;
+  }
+
+
 }

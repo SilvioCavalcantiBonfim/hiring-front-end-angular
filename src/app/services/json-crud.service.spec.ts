@@ -102,16 +102,9 @@ describe('JsonCrudService', () => {
       role: 'Software Engineer',
       dateJoined: '2023-09-01'
     };
-    identifierService.getAndIncrement.and.returnValue(1);
-    // Act
-    service.create({ 
-      name: employee.name, 
-      email: employee.email, 
-      phone: employee.phone, 
-      department: employee.department, 
-      role: employee.role, 
-      dateJoined: employee.dateJoined 
-    });
+    
+    service['employeeCollection']['data'] = [employee];
+    
     const result = service.show();
 
     // Assert
@@ -133,14 +126,8 @@ describe('JsonCrudService', () => {
     };
 
     // Act
-    service.create({ 
-      name: employee.name, 
-      email: employee.email, 
-      phone: employee.phone, 
-      department: employee.department, 
-      role: employee.role, 
-      dateJoined: employee.dateJoined 
-    });
+    service['employeeCollection']['data'] = [employee];
+
     const result = service.show();
 
     // Assert
@@ -157,5 +144,59 @@ describe('JsonCrudService', () => {
     }).toThrowError(TypeError); // O array não deve permitir a modificação
   });
 
-  
+  it('should delete an employee by id', () => {
+    // Arrange
+    const employee1: Employee = {
+      id: 1,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+1 555-555-5555',
+      department: 'Engineering',
+      role: 'Software Engineer',
+      dateJoined: '2023-09-01'
+    };
+
+    const employee2: Employee = {
+      id: 2,
+      name: 'Jane Smith',
+      email: 'jane.smith@example.com',
+      phone: '+1 555-666-7777',
+      department: 'Marketing',
+      role: 'Marketing Specialist',
+      dateJoined: '2023-09-02'
+    };
+
+    service['employeeCollection']['data'] = [employee1, employee2];
+
+    // Act
+    const result = service.delete(employee1.id);
+
+    // Assert
+    expect(result).toBeTrue(); // Verifica que o funcionário foi deletado
+    expect(service.show()).toEqual([employee2]); // Verifica que o funcionário restante é o correto
+  });
+
+  // Teste de tentativa de deletar um ID inexistente
+  it('should return false when trying to delete an employee that does not exist', () => {
+    // Arrange
+    const employee: Employee = {
+      id: 1,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+1 555-555-5555',
+      department: 'Engineering',
+      role: 'Software Engineer',
+      dateJoined: '2023-09-01'
+    };
+
+    
+    service['employeeCollection']['data'] = [employee];
+
+    // Act
+    const result = service.delete(999); // ID que não existe
+
+    // Assert
+    expect(result).toBeFalse(); // Verifica que o retorno é falso
+    expect(service.show()).toEqual([employee]); // Verifica que o funcionário ainda está presente
+  });
 });
