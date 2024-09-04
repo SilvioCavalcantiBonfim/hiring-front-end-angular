@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { JsonCrudService } from './json-crud.service';
 import { IdentifierService } from './identifier/identifier.service';
-import { Employee } from '../types/employee.type';
-import { EmployeeInput } from '../types/employeeInput.type';
+import { Employee, EmployeeInput } from '../interfaces/employee';
 
 describe('JsonCrudService', () => {
   let service: JsonCrudService;
@@ -198,5 +197,51 @@ describe('JsonCrudService', () => {
     // Assert
     expect(result).toBeFalse(); // Verifica que o retorno é falso
     expect(service.show()).toEqual([employee]); // Verifica que o funcionário ainda está presente
+  });
+
+  it('should update an employee by id', () => {
+    // Arrange
+    const employee: Employee = {
+      id: 1,
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      phone: '+1 555-555-5555',
+      department: 'Engineering',
+      role: 'Software Engineer',
+      dateJoined: '2023-09-01'
+    };
+
+    const updatedData = {
+      name: 'John Smith',
+      email: 'john.smith@example.com',
+      phone: '+1 555-555-5556'
+    };
+
+    // Act
+    const result = service.update(employee.id, updatedData);
+
+    // Assert
+    expect(result).toBeTrue(); // Verifica que a atualização foi bem-sucedida
+    const updatedEmployee = service.show().find(emp => emp.id === employee.id);
+    expect(updatedEmployee).toEqual({
+      ...employee,
+      ...updatedData
+    }); // Verifica se o funcionário foi atualizado corretamente
+  });
+
+  // Teste de tentativa de atualizar um ID inexistente
+  it('should return false when trying to update an employee that does not exist', () => {
+    // Arrange
+    const updatedData = {
+      name: 'Nonexistent Employee',
+      email: 'nonexistent@example.com'
+    };
+
+    // Act
+    const result = service.update(999, updatedData); // ID que não existe
+
+    // Assert
+    expect(result).toBeFalse(); // Verifica que o retorno é falso
+    expect(service.show()).toEqual([]); // Verifica que o array de funcionários está vazio
   });
 });
