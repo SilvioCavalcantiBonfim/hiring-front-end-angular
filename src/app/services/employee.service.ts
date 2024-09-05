@@ -8,7 +8,7 @@ import { Collection } from '@interfaces/collection';
 @Injectable({
   providedIn: 'root'
 })
-export class JsonCrudService {
+export class EmployeeService {
 
   private employeeCollection$ = new BehaviorSubject({ "data": [] } as Collection<Employee>);
 

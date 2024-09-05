@@ -4,7 +4,7 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAda
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EmployeeInput } from '@interfaces/employee';
-import { JsonCrudService } from '@services/json-crud.service';
+import { EmployeeService } from '@services/employee.service';
 
 @Component({
   selector: 'app-create-dialog',
@@ -33,12 +33,12 @@ export class CreateDialogComponent {
 
   constructor(
     private dialogRef: MatDialogRef<CreateDialogComponent>,
-    private jsonCrud: JsonCrudService,
+    private employeeService: EmployeeService,
     private formBuilder: FormBuilder
   ) { }
 
   onSubmit() {
-    this.jsonCrud.create(this.createEmployeeForm.value as EmployeeInput)
+    this.employeeService.create(this.createEmployeeForm.value as EmployeeInput)
     this.dialogRef.close();
   }
 }

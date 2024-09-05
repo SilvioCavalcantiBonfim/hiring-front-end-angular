@@ -1,23 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { JsonCrudService } from './json-crud.service'; // Atualize o caminho conforme necessário
+import { EmployeeService } from './employee.service'; // Atualize o caminho conforme necessário
 import { Employee, EmployeeInput, EmployeeUpdateInput } from '../interfaces/employee'; // Atualize o caminho conforme necessário
 import { Collection } from '../interfaces/collection'; // Atualize o caminho conforme necessário
 import { IdentifierService } from './identifier/identifier.service'; // Atualize o caminho conforme necessário
 
 describe('JsonCrudService', () => {
-  let service: JsonCrudService;
+  let service: EmployeeService;
   let mockIdentifierService: jasmine.SpyObj<IdentifierService>;
 
   beforeEach(() => {
     mockIdentifierService = jasmine.createSpyObj('IdentifierService', ['getAndIncrement']);
     TestBed.configureTestingModule({
       providers: [
-        JsonCrudService,
+        EmployeeService,
         { provide: IdentifierService, useValue: mockIdentifierService }
       ]
     });
-    service = TestBed.inject(JsonCrudService);
+    service = TestBed.inject(EmployeeService);
   });
 
   it('should create an employee and update the collection', () => {
