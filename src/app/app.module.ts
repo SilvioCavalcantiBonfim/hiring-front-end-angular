@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CreateDialogComponent } from '@components/create-dialog/create-dialog.component';
@@ -9,6 +8,7 @@ import { NavBarComponent } from '@components/nav-bar/nav-bar.component';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { MaterialModule } from './material.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

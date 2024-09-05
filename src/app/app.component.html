@@ -20,7 +20,7 @@
       <td>{{employee.phone}}</td>
       <td>{{employee.department}}</td>
       <td>{{employee.role}}</td>
-      <td>{{employee.dateJoined}}</td>
+      <td>{{employee.dateJoined | date: 'dd/MM/yyyy'}}</td>
       <td>
         <button mat-icon-button color="primary">
           <mat-icon class="icon">edit</mat-icon>
