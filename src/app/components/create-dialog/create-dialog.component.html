@@ -1,4 +1,4 @@
-<h1 mat-dialog-title> 
+<h1 mat-dialog-title>
   <mat-icon>badge</mat-icon>
   <span>Cadastrar novo funcionário</span>
 </h1>
@@ -18,7 +18,8 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Contato</mat-label>
-      <input matInput placeholder="Contato..." formControlName="phone">
+      <input matInput placeholder="Contato..." formControlName="phone" mask="+0 000-000-0000" [showMaskTyped]="true"
+        [dropSpecialCharacters]="false">
       <mat-icon matSuffix>phone</mat-icon>
     </mat-form-field>
   </p>
