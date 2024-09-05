@@ -5,7 +5,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [],
@@ -16,7 +18,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatToolbarModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

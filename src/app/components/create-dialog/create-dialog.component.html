@@ -1,4 +1,7 @@
-<h1 mat-dialog-title>Cadastrar novo funcionário</h1>
+<h1 mat-dialog-title> 
+  <mat-icon>badge</mat-icon>
+  <span>Cadastrar novo funcionário</span>
+</h1>
 <form [formGroup]="createEmployeeForm" (ngSubmit)="onSubmit()">
   <p>
     <mat-form-field appearance="outline">
@@ -13,8 +16,6 @@
       <input matInput placeholder="E-mail..." formControlName="email">
       <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
-  </p>
-  <p>
     <mat-form-field appearance="outline">
       <mat-label>Contato</mat-label>
       <input matInput placeholder="Contato..." formControlName="phone">
@@ -38,8 +39,9 @@
   <p>
     <mat-form-field appearance="outline">
       <mat-label>data de Admissão</mat-label>
-      <input matInput placeholder="Cargo..." type="date" formControlName="dateJoined">
-      <mat-icon matSuffix>calendar_month</mat-icon>
+      <input matInput [matDatepicker]="picker" formControlName="dateJoined">
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </p>
 

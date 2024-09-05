@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EmployeeInput } from '@interfaces/employee';
 import { JsonCrudService } from '@services/json-crud.service';
@@ -7,7 +9,16 @@ import { JsonCrudService } from '@services/json-crud.service';
 @Component({
   selector: 'app-create-dialog',
   templateUrl: './create-dialog.component.html',
-  styleUrls: ['./create-dialog.component.scss']
+  styleUrls: ['./create-dialog.component.scss'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class CreateDialogComponent {
 
