@@ -13,7 +13,7 @@ export class DeleteDialogComponent {
   ) { }
 
   onCancel(): void {
-    this.dialogRef.close(null);
+    this.dialogRef.close();
   }
 
   onConfirm(): void {

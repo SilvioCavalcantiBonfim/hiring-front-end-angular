@@ -11,7 +11,7 @@
     <th>dateJoined</th>
     <th>actions</th>
   </tr>
-  <ng-container *ngTemplateOutlet="main; context: {employees: JsonCrud.read() | async}" />
+  <ng-container *ngTemplateOutlet="main; context: {employees: employeeService.read() | async}" />
   <ng-template #main let-employees="employees.data">
     <tr *ngFor="let employee of employees">
       <td>{{employee.id}}</td>
@@ -25,7 +25,7 @@
         <button mat-icon-button color="primary">
           <mat-icon class="icon">edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="openDialog(employee)">
+        <button mat-icon-button color="warn" (click)="openDeleteDialog(employee)">
           <mat-icon class="icon">person_remove</mat-icon>
         </button>
       </td>

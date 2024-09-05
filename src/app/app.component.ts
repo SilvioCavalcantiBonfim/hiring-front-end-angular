@@ -14,7 +14,7 @@ export class AppComponent {
 
   constructor(protected employeeService: EmployeeService, private dialog: MatDialog) { }
 
-  openDialog(employee: Employee): void {
+  openDeleteDialog(employee: Employee): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: { employee: employee }
     });
