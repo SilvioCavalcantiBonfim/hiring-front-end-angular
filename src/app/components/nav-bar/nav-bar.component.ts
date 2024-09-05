@@ -16,8 +16,6 @@ export class NavBarComponent {
   constructor(private dialog: MatDialog){}
 
   onCreate(): void{
-    const createDialog = this.dialog.open(CreateDialogComponent);
-
-    createDialog.afterClosed().subscribe(console.log)
+    this.dialog.open(CreateDialogComponent);
   }
 }
