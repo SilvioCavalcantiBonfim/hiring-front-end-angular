@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class IdentifierService {
 
-  private id: number = 0;
+  private id = 0;
 
   getAndIncrement(): number{
     return this.id++;

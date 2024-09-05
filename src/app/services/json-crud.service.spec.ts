@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { JsonCrudService } from './json-crud.service'; // Atualize o caminho conforme necessário
 import { Employee, EmployeeInput, EmployeeUpdateInput } from '../interfaces/employee'; // Atualize o caminho conforme necessário
 import { Collection } from '../interfaces/collection'; // Atualize o caminho conforme necessário
@@ -53,7 +53,7 @@ describe('JsonCrudService', () => {
     // Arrange
     const initialCollection: Collection<Employee> = { data: [] };
     const employeeCollection$ = new BehaviorSubject<Collection<Employee>>(initialCollection);
-    (service as any).employeeCollection$ = employeeCollection$;
+    (service as unknown as { employeeCollection$: Observable<Collection<Employee>> }).employeeCollection$ = employeeCollection$;
 
     // Act
     const result$ = service.read();
@@ -73,7 +73,7 @@ describe('JsonCrudService', () => {
     const idToDelete = 1;
 
     const employeeCollection$ = new BehaviorSubject<Collection<Employee>>(initialCollection);
-    (service as any).employeeCollection$ = employeeCollection$;
+    (service  as unknown as { employeeCollection$: Observable<Collection<Employee>> }).employeeCollection$ = employeeCollection$;
 
     // Act
     service.delete(idToDelete);
@@ -94,7 +94,7 @@ describe('JsonCrudService', () => {
     const idToUpdate = 1;
 
     const employeeCollection$ = new BehaviorSubject<Collection<Employee>>(initialCollection);
-    (service as any).employeeCollection$ = employeeCollection$;
+    (service  as unknown as { employeeCollection$: Observable<Collection<Employee>> }).employeeCollection$ = employeeCollection$;
 
     // Act
     service.update(idToUpdate, updatedData);
