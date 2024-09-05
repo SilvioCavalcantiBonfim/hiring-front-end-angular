@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IdentifierService } from './identifier/identifier.service';
-import { Collection } from '../interfaces/collection';
-import { Employee, EmployeeInput, EmployeeUpdateInput } from '../interfaces/employee';
 import { BehaviorSubject, Observable } from 'rxjs';
+
+import { Employee, EmployeeInput, EmployeeUpdateInput } from '@interfaces/employee';
+import { IdentifierService } from '@services/identifier/identifier.service';
+import { Collection } from '@interfaces/collection';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { JsonCrudService } from './services/json-crud.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Employee } from './interfaces/employee';
-import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { DeleteDialogComponent } from '@components/delete-dialog/delete-dialog.component';
+import { JsonCrudService } from '@services/json-crud.service';
+import { Employee } from '@interfaces/employee';
 
 @Component({
   selector: 'app-root',

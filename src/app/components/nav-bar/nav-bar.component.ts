@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateDialogComponent } from '../create-dialog/create-dialog.component';
+
+import { CreateDialogComponent } from '@components/create-dialog/create-dialog.component';
 
 @Component({
   selector: 'app-nav-bar',

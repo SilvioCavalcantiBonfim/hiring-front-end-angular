@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { JsonCrudService } from 'src/app/services/json-crud.service';
+import { JsonCrudService } from '@services/json-crud.service';
 
 @Component({
   selector: 'app-create-dialog',
