@@ -7,11 +7,12 @@ import { DeleteDialogComponent } from '@components/delete-dialog/delete-dialog.c
 import { NavBarComponent } from '@components/nav-bar/nav-bar.component';
 
 import { AppComponent } from './app.component';
-import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.component';
 import { DatePipe } from '@angular/common';
+import { TableComponent } from '@components/table/table.component';
+import { MaterialModule } from '@modules/material.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DatePipe } from '@angular/common';
     DeleteDialogComponent,
     NavBarComponent,
     CreateDialogComponent,
-    UpdateDialogComponent
+    UpdateDialogComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
