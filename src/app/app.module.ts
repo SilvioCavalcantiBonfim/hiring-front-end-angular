@@ -10,23 +10,26 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     DeleteDialogComponent,
     NavBarComponent,
-    CreateDialogComponent
+    CreateDialogComponent,
+    UpdateDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
     ReactiveFormsModule,
+    MaterialModule,
     NgxMaskPipe,
     NgxMaskDirective
   ],
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

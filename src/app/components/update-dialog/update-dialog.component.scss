@@ -1,0 +1,27 @@
+:host{
+  padding: 0 20px;
+}
+p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 0 20px;
+  mat-icon{
+    opacity: 0.54;
+  }
+}
+.action{
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+h1{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

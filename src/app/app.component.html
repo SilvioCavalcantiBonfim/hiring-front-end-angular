@@ -22,7 +22,7 @@
       <td>{{employee.role}}</td>
       <td>{{employee.dateJoined | date: 'dd/MM/yyyy'}}</td>
       <td>
-        <button mat-icon-button color="primary">
+        <button mat-icon-button color="primary" (click)="openUpdateSheet(employee)">
           <mat-icon class="icon">edit</mat-icon>
         </button>
         <button mat-icon-button color="warn" (click)="openDeleteDialog(employee)">

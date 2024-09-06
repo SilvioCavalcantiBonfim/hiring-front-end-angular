@@ -8,6 +8,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -20,7 +23,10 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatBottomSheetModule,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }

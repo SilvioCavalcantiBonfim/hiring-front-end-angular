@@ -12,7 +12,7 @@ export class EmployeeService {
 
   private employeeCollection$ = new BehaviorSubject({ "data": [] } as Collection<Employee>);
 
-  constructor(private identifier: IdentifierService) { }
+  constructor(private readonly identifier: IdentifierService) { }
 
   create(employee: EmployeeInput): void {
     const currentCollection = this.employeeCollection$.value;

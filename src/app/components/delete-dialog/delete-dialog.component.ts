@@ -7,16 +7,21 @@ import { Employee } from '@interfaces/employee';
   templateUrl: './delete-dialog.component.html'
 })
 export class DeleteDialogComponent {
+
+  protected readonly employee: Employee;
+
   constructor(
-    private dialogRef: MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {employee: Employee}
-  ) { }
+    private readonly dialogRef: MatDialogRef<DeleteDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) { employee }: {employee: Employee}
+  ) { 
+    this.employee = employee
+  }
 
   onCancel(): void {
     this.dialogRef.close();
   }
 
   onConfirm(): void {
-    this.dialogRef.close(this.data.employee.id);
+    this.dialogRef.close(this.employee.id);
   }
 }

@@ -7,11 +7,11 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 
 ## Regras de negócio
-[ ]	Novos registros devem conter todos os campos obrigatórios (name, email, phone, department, role, dateJoined).
+[X]	Novos registros devem conter todos os campos obrigatórios (name, email, phone, department, role, dateJoined).
 
 [X]	O campo id deve ser gerado automaticamente ao adicionar um novo registro.
 
-[ ]	Qualquer campo de um registro existente pode ser editado, exceto o id.
+[X]	Qualquer campo de um registro existente pode ser editado, exceto o id.
 
 [X]	Um registro pode ser excluído apenas se o usuário confirmar a ação (ex: através de um modal de confirmação).
 
