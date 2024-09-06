@@ -11,7 +11,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
-
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [],
   imports: [],
@@ -26,7 +26,8 @@ import {MatListModule} from '@angular/material/list';
     MatNativeDateModule,
     MatBottomSheetModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

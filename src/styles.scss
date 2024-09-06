@@ -45,6 +45,43 @@ $my-theme: mat.define-light-theme((
  )
 ));
 
+.nav-container{
+  background-color: mat.get-color-from-palette($m2-primary, 50);
+
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  min-width: 375px;
+  overflow-x: auto;
+  $breakpoints: (
+    640px,
+    768px,
+    1024px,
+    1280px,
+    1536px
+  );
+  
+  @for $index from 1 through length($breakpoints) {
+     $breakpoint: nth($breakpoints, $index);
+
+    @if $index < length($breakpoints) {
+      $nextBreakpoint: nth($breakpoints, $index + 1);
+     
+      @media screen and (min-width: $breakpoint) and (max-width: ($nextBreakpoint - 1)) {
+        width: $breakpoint;
+      }
+    } @else {
+      @media screen and (min-width: $breakpoint) {
+        width: $breakpoint;
+      }
+    }
+  }
+}
+
 .main-table{
   width: 100%;
   border-spacing: 0;

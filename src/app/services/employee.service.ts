@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, distinct, Observable } from 'rxjs';
 
 import { Employee, EmployeeInput, EmployeeUpdateInput } from '@interfaces/employee';
 import { IdentifierService } from '@services/identifier/identifier.service';
@@ -28,7 +28,7 @@ export class EmployeeService {
   
 
   read(): Observable<Collection<Employee>> {
-    return this.employeeCollection$.asObservable();
+    return this.employeeCollection$.asObservable().pipe(distinct());
   }
 
   update(id: number, updatedData: EmployeeUpdateInput): void {

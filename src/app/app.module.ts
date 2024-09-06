@@ -13,6 +13,7 @@ import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.c
 import { DatePipe } from '@angular/common';
 import { TableComponent } from '@components/table/table.component';
 import { MaterialModule } from '@modules/material.module';
+import { FiltersComponent } from './components/filters/filters.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MaterialModule } from '@modules/material.module';
     NavBarComponent,
     CreateDialogComponent,
     UpdateDialogComponent,
-    TableComponent
+    TableComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
