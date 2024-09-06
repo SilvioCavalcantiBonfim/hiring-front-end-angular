@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Dictionary } from '@interfaces/dictionary';
 import { Employee } from '@interfaces/employee';
 import { EmployeeService } from '@services/employee.service';
-import { combineLatest, map, startWith } from 'rxjs';
+import { FilterService } from '@services/filter.service';
+import { combineLatest, debounceTime, map, startWith, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit, OnDestroy {
 
-  constructor(private readonly employeeService: EmployeeService){}
+  constructor(private readonly employeeService: EmployeeService, private readonly filterService: FilterService){}
+
+  private sub$: Subscription | undefined;
 
   protected searchType = new FormControl('name');
   protected search = new FormControl('');
@@ -62,5 +65,20 @@ export class SearchComponent {
   isEmpty(): boolean {
     const value = this.search.value;
     return value === null || value === '' || value === undefined;
+  }
+
+  ngOnInit(): void {
+    
+    this.searchType.valueChanges.subscribe(() => this.search.reset(''));
+
+    this.sub$ = combineLatest([
+      this.type$, 
+      this.search.valueChanges.pipe(startWith(''), debounceTime(300))
+    ])
+    .subscribe(([key, value]) => this.filterService.addFilter(key || 'name', value || ''));
+  }
+    
+  ngOnDestroy(): void {
+    this.sub$?.unsubscribe();
   }
 }

@@ -14,7 +14,7 @@
       <mat-icon matSuffix *ngIf="isEmpty() else searchIco">search</mat-icon>
       
       <ng-template #searchIco>
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="search.reset()">
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="search.reset('')">
           <mat-icon>close</mat-icon>
         </button>
       </ng-template>

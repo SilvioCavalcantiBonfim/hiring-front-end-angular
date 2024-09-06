@@ -4,6 +4,7 @@ import { BehaviorSubject, distinct, Observable } from 'rxjs';
 import { Employee, EmployeeInput, EmployeeUpdateInput } from '@interfaces/employee';
 import { IdentifierService } from '@services/identifier/identifier.service';
 import { Collection } from '@interfaces/collection';
+import { FilterService } from './filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class EmployeeService {
 
   private employeeCollection$ = new BehaviorSubject({ "data": [] } as Collection<Employee>);
 
-  constructor(private readonly identifier: IdentifierService) { }
+  constructor(private readonly identifier: IdentifierService, private filterService: FilterService) { }
 
   create(employee: EmployeeInput): void {
     const currentCollection = this.employeeCollection$.value;
@@ -28,7 +29,7 @@ export class EmployeeService {
   
 
   read(): Observable<Collection<Employee>> {
-    return this.employeeCollection$.asObservable().pipe(distinct());
+    return this.filterService.applyIn(this.employeeCollection$).pipe(distinct());
   }
 
   update(id: number, updatedData: EmployeeUpdateInput): void {
