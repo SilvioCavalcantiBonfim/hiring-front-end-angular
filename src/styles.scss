@@ -1,2 +1,82 @@
+@use '@angular/material' as mat;
+
+$m2-primary: (
+    50 : #e3e7f2,
+    100 : #b9c4de,
+    200 : #8b9cc9,
+    300 : #5d74b3,
+    400 : #3a57a2,
+    500 : #173992,
+    600 : #14338a,
+    700 : #112c7f,
+    800 : #0d2475,
+    900 : #071763,
+    A100 : #a0c3ff,
+    A200 : #6da3ff,
+    A400 : #3a83ff,
+    A700 : #2073ff,
+    contrast: (
+        50 : rgba(black, 0.87),
+        100 : rgba(black, 0.87),
+        200 : rgba(black, 0.87),
+        300 : #ffffff,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : rgba(black, 0.87),
+        A200 : rgba(black, 0.87),
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$my-primary: mat.define-palette($m2-primary, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-warn: mat.define-palette(mat.$red-palette);
+
+$my-theme: mat.define-light-theme((
+ color: (
+   primary: $my-primary,
+   accent: $my-accent,
+   warn: $my-warn,
+ )
+));
+
+.main-table{
+  width: 100%;
+  border-spacing: 0;
+  td{
+    text-align: center;
+    text-wrap: nowrap;
+    padding: 0 10px;
+  }
+  td:last-child{
+    display: flex;
+    justify-content: space-around;
+  }
+  th{
+    background-color: mat.get-color-from-palette($m2-primary, 300);
+    color: #ffffff;
+    text-transform: capitalize;
+    font-weight: 300;
+    letter-spacing: 0.05rem;
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+  
+  tr:nth-child(2n+1){
+    background-color: rgba($color: #000000, $alpha: 0.05);
+  }
+  
+  tr:hover{
+    background-color: mat.get-color-from-palette($m2-primary, 50);
+  }
+}
+
+@include mat.all-component-themes($my-theme);
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,34 +1,3 @@
 <app-nav-bar [title]="title"/>
 
-<table>
-  <tr>
-    <th>id</th>
-    <th>name</th>
-    <th>email</th>
-    <th>phone</th>
-    <th>department</th>
-    <th>role</th>
-    <th>dateJoined</th>
-    <th>actions</th>
-  </tr>
-  <ng-container *ngTemplateOutlet="main; context: {employees: employeeService.read() | async}" />
-  <ng-template #main let-employees="employees.data">
-    <tr *ngFor="let employee of employees">
-      <td>{{employee.id}}</td>
-      <td>{{employee.name}}</td>
-      <td>{{employee.email}}</td>
-      <td>{{employee.phone}}</td>
-      <td>{{employee.department}}</td>
-      <td>{{employee.role}}</td>
-      <td>{{employee.dateJoined | date: 'dd/MM/yyyy'}}</td>
-      <td>
-        <button mat-icon-button color="primary" (click)="openUpdateSheet(employee)">
-          <mat-icon class="icon">edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="openDeleteDialog(employee)">
-          <mat-icon class="icon">person_remove</mat-icon>
-        </button>
-      </td>
-    </tr>
-  </ng-template>
-</table>
+<app-table></app-table>
