@@ -1,0 +1,35 @@
+<div class="filter-bar">
+</div>
+
+<table>
+  <tr>
+    <th>N</th>
+    <th>Nome</th>
+    <th>email</th>
+    <th>Contato</th>
+    <th>Departamento</th>
+    <th>Cargo</th>
+    <th>data de Admissão</th>
+    <th>Ação</th>
+  </tr>
+  <ng-container *ngTemplateOutlet="main; context: {employees: employeeService.read() | async}" />
+  <ng-template #main let-employees="employees.data">
+  <tr *ngFor="let employee of employees">
+    <td>{{employee.id}}</td>
+    <td>{{employee.name}}</td>
+    <td>{{employee.email}}</td>
+    <td>{{employee.phone}}</td>
+    <td>{{employee.department}}</td>
+    <td>{{employee.role}}</td>
+    <td>{{employee.dateJoined | date: 'dd/MM/yyyy'}}</td>
+    <td>
+      <button mat-icon-button color="primary" (click)="openUpdateSheet(employee)">
+        <mat-icon class="icon">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="openDeleteDialog(employee)">
+        <mat-icon class="icon">person_remove</mat-icon>
+      </button>
+    </td>
+  </tr>
+</ng-template>
+</table>

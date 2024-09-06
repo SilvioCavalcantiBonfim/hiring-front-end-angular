@@ -1,0 +1,44 @@
+:host{
+  margin: auto;
+  display: block;
+  min-width: 375px;
+  overflow-x: auto;
+  $breakpoints: (
+    640px,
+    768px,
+    1024px,
+    1280px,
+    1536px
+  );
+  
+  @for $index from 1 through length($breakpoints) {
+     $breakpoint: nth($breakpoints, $index);
+    @if $index < length($breakpoints) {
+      $nextBreakpoint: nth($breakpoints, $index + 1);
+      @media (min-width: $breakpoint) and (max-width: ($nextBreakpoint - 1)) {
+        width: $breakpoint;
+      }
+    } @else {
+      @media (min-width: $breakpoint) {
+        width: $breakpoint;
+      }
+    }
+  }
+
+  table{
+    width: 100%;
+    border-spacing: 0;
+    td{
+      text-align: center;
+      text-wrap: nowrap;
+      padding: 0 10px;
+    }
+    tr:nth-child(2n){
+      background-color: rgba($color: #000000, $alpha: 0.1);
+    }
+    td:last-child{
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}
