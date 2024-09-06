@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 import { TableComponent } from '@components/table/table.component';
 import { MaterialModule } from '@modules/material.module';
 import { FiltersComponent } from './components/filters/filters.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FiltersComponent } from './components/filters/filters.component';
     CreateDialogComponent,
     UpdateDialogComponent,
     TableComponent,
-    FiltersComponent
+    FiltersComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

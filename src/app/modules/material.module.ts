@@ -12,6 +12,9 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 @NgModule({
   declarations: [],
   imports: [],
@@ -27,7 +30,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatBottomSheetModule,
     MatSidenavModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule
   ]
 })
 export class MaterialModule { }

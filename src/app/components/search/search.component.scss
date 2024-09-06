@@ -1,0 +1,14 @@
+:host{
+  gap: 10px;
+  flex: 1;
+  display: flex;
+
+  mat-form-field{
+    flex: 1;
+  }
+
+  mat-button-toggle{
+    display: flex;
+    align-items: center;
+  }
+}

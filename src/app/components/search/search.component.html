@@ -1,0 +1,20 @@
+<mat-button-toggle-group [formControl]="searchType">
+  <mat-button-toggle value="name">Nome</mat-button-toggle>
+  <mat-button-toggle value="email">Email</mat-button-toggle>
+  <mat-button-toggle value="phone">Contato</mat-button-toggle>
+</mat-button-toggle-group>
+
+<ng-container *ngTemplateOutlet="search; context: {type: currentType$ | async}" />
+<ng-template #search let-context="type">
+  <mat-form-field appearance="outline">
+    <mat-label>Buscar por {{context.name}}...</mat-label>
+    <input type="text" aria-label="Number" matInput [matAutocomplete]="auto">
+    <mat-icon matSuffix>search</mat-icon>
+    <mat-icon matPrefix>{{ context.ico }}</mat-icon>
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option [value]="option" *ngFor="let option of options$ | async">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</ng-template>

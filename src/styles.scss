@@ -82,6 +82,10 @@ $my-theme: mat.define-light-theme((
   }
 }
 
+.mat-mdc-form-field-subscript-wrapper{
+  display: none;
+}
+
 .main-table{
   width: 100%;
   border-spacing: 0;
