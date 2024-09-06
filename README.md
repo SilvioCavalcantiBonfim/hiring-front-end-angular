@@ -17,6 +17,8 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 [ ]	A tabela deve permitir filtrar por department e role.
 
+[ ]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
+
 [ ]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
 
 [ ]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
@@ -24,8 +26,6 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 [ ]	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
 
 [ ]	O CSV deve incluir apenas os registros da página atual se a paginação estiver ativa.
-
-[ ]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
 
 
 ## Referências
