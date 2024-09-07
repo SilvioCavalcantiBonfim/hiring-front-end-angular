@@ -54,7 +54,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   private applyFilter(attribute: string){
     return (value: string[] | null) => {
       if (value && value.length > 0) {
-        this.filterService.setFilter(attribute, value);
+        this.filterService.setFilter(attribute, value, false);
       } else {
         this.filterService.clearFilter(attribute);
       }

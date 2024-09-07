@@ -11,9 +11,9 @@ export class FilterService {
 
   private activeFilters$ = new BehaviorSubject<Filter>({});
 
-  setFilter(filterName: string, value: string[]) {
+  setFilter(filterName: string, value: string[], relative = true) {
     const currentFilters = this.activeFilters$.value;
-    currentFilters[filterName] = value;
+    currentFilters[filterName] = {args: value, relative: relative};
     this.activeFilters$.next(currentFilters);
   }
 
@@ -32,13 +32,18 @@ export class FilterService {
     return Object.entries(filters).every(([filterKey, filterValues]) => {
       const employeeAttribute = employee[filterKey as keyof Employee];
       if (!employeeAttribute) return false;
-      return this.matchesAnyFilterValue(filterValues, employeeAttribute as string);
+      return this.matchesAnyFilterValue(filterValues.args, employeeAttribute as string, filterValues.relative);
     });
   }
   
-  private matchesAnyFilterValue(filterValues: string[], employeeAttributeValue: string): boolean {
-    return filterValues.some(filterValue => 
-      employeeAttributeValue.toLowerCase().includes(filterValue.toLowerCase())
+  private matchesAnyFilterValue(filterValues: string[], employeeAttributeValue: string, relative: boolean): boolean {
+    return filterValues.some(filterValue => {
+      if(relative){
+        return employeeAttributeValue.toLowerCase().includes(filterValue.toLowerCase());
+      }else{
+        return employeeAttributeValue.toLowerCase() === filterValue.toLowerCase();
+      }
+    }
     );
   }
 
