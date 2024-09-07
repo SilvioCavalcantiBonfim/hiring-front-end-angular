@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.component';
-import { DatePipe } from '@angular/common';
 import { TableComponent } from '@components/table/table.component';
 import { MaterialModule } from '@modules/material.module';
 import { FiltersComponent } from './components/filters/filters.component';
@@ -35,7 +34,7 @@ import { SearchComponent } from './components/search/search.component';
     NgxMaskPipe,
     NgxMaskDirective
   ],
-  providers: [provideNgxMask(), DatePipe],
+  providers: [provideNgxMask()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
