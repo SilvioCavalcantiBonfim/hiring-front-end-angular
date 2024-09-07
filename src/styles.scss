@@ -55,6 +55,7 @@ $my-theme: mat.define-light-theme((
   padding: 10px 20px;
   box-sizing: border-box;
   width: 100%;
+  overflow-x: auto;
 }
 
 .mat-mdc-form-field-subscript-wrapper{

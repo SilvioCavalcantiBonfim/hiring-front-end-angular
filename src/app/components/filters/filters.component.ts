@@ -16,7 +16,7 @@ export class FiltersComponent implements OnInit, OnDestroy {
   protected departments = new FormControl<string[]>([]);
   protected roles = new FormControl<string[]>([]);
 
-  private employees$: Observable<Collection<Employee>> = this.employeeService.read();
+  private employees$: Observable<Collection<Employee>> = this.employeeService.rawRead();
 
   protected departmentList$: Observable<string[]> = this.employees$.pipe(map(this.extractList('department')));
   protected roleList$: Observable<string[]> = this.employees$.pipe(map(this.extractList('role')));
