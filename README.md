@@ -21,7 +21,7 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 [ ]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
 
-[ ]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
+[X]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
 
 [X]	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
 

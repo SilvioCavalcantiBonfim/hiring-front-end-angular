@@ -1,0 +1,9 @@
+<mat-slide-toggle color="primary" [formControl]="enabledPaginator">Paginação</mat-slide-toggle>
+
+<mat-paginator (page)="handlePageEvent($event)"
+[length]="length$ | async"
+pageSize="5"
+showFirstLastButtons
+hidePageSize
+pageIndex="0">
+</mat-paginator>

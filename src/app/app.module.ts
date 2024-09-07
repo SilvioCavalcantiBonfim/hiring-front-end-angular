@@ -14,6 +14,7 @@ import { TableComponent } from '@components/table/table.component';
 import { MaterialModule } from '@modules/material.module';
 import { FiltersComponent } from './components/filters/filters.component';
 import { SearchComponent } from './components/search/search.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { SearchComponent } from './components/search/search.component';
     UpdateDialogComponent,
     TableComponent,
     FiltersComponent,
-    SearchComponent
+    SearchComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

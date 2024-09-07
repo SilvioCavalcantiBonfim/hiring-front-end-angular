@@ -26,7 +26,6 @@ export class EmployeeService {
   
     this.employeeCollection$.next(updatedCollection);
   }
-  
 
   read(): Observable<Collection<Employee>> {
     return this.filterService.applyFiltersToCollection(this.employeeCollection$).pipe(distinct());

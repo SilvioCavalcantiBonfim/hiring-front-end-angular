@@ -5,6 +5,7 @@ import { DeleteDialogComponent } from '@components/delete-dialog/delete-dialog.c
 import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.component';
 import { Employee } from '@interfaces/employee';
 import { EmployeeService } from '@services/employee.service';
+import { PaginatorService } from '@services/paginator.service';
 
 @Component({
   selector: 'app-table',
@@ -14,10 +15,13 @@ import { EmployeeService } from '@services/employee.service';
 export class TableComponent {
 
   constructor(
-    protected employeeService: EmployeeService, 
+    private employeeService: EmployeeService, 
+    private paginatorService: PaginatorService,
     private dialog: MatDialog, 
     private bottomSheet: MatBottomSheet
   ) { }
+
+  protected currentEmployee$ = this.paginatorService.applyPaginatorToCollection(this.employeeService.read());
 
   openDeleteDialog(employee: Employee): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {

@@ -2,11 +2,11 @@ import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular
 import { MatDialog } from '@angular/material/dialog';
 
 import { CreateDialogComponent } from '@components/create-dialog/create-dialog.component';
-import { Collection } from '@interfaces/collection';
-import { Employee, EmployeeInput } from '@interfaces/employee';
+import { EmployeeInput } from '@interfaces/employee';
 import { CsvService } from '@services/csv.service';
 import { EmployeeService } from '@services/employee.service';
-import { fromEvent, map, switchMap } from 'rxjs';
+import { PaginatorService } from '@services/paginator.service';
+import { fromEvent, withLatestFrom } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,19 +21,20 @@ export class NavBarComponent implements AfterViewInit {
   @ViewChild('download', { read: ElementRef }) 
   downloadButton!: ElementRef;
 
-  protected readonly buttonStatus$ = this.employeeService.read().pipe(map((collection) => collection.data.length === 0));
-
   constructor(
     private readonly dialog: MatDialog,
     private readonly employeeService: EmployeeService,
-    private readonly csvService: CsvService
+    private readonly csvService: CsvService,
+    private readonly paginatorService: PaginatorService
   ){}
 
   ngAfterViewInit(): void {
     fromEvent(this.downloadButton.nativeElement, 'click')
-    .pipe(switchMap(() => this.employeeService.read()))
-    .subscribe((collection: Collection<Employee>) => {
-      return this.csvService.download(collection);
+    .pipe(
+      withLatestFrom(this.paginatorService.applyPaginatorToCollection(this.employeeService.read()))
+    )
+    .subscribe((event) => {
+      return this.csvService.download(event[1]);
     });
   }
 

@@ -15,10 +15,11 @@ export class CsvService {
 
     const body = data.map((employee) => {
       const row = headers.map(header => employee[header as keyof Employee].toString()).join(',');
-      return `${row}\n`;
+      console.log(row)
+      return row;
     })
 
-    const csv = `${headers.join(',')}\n${body}`
+    const csv = `${headers.join(',')}\n${body.join('\n')}`
 
     return csv;
   }
