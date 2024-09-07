@@ -51,6 +51,19 @@ $my-theme: mat.define-light-theme((
   display: flex;
   align-items: center;
   justify-content: space-around;
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    app-search{
+      width: 100%;
+      @media (max-width: 640px) {
+        flex-direction: column;
+      }
+    }
+    app-filters{
+      width: 100%;
+      justify-content: end;
+    }
+  }
   gap: 10px;
   padding: 10px 20px;
   box-sizing: border-box;
