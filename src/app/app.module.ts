@@ -15,6 +15,8 @@ import { MaterialModule } from '@modules/material.module';
 import { FiltersComponent } from './components/filters/filters.component';
 import { SearchComponent } from './components/search/search.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { MainComponent } from './pages/main/main.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     TableComponent,
     FiltersComponent,
     SearchComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     ReactiveFormsModule,
     MaterialModule,
     NgxMaskPipe,
-    NgxMaskDirective
+    NgxMaskDirective,
+    AppRoutingModule
   ],
   providers: [provideNgxMask()],
   bootstrap: [AppComponent]
