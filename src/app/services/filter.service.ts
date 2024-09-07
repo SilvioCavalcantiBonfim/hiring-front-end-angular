@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
-import { Filter } from '@interfaces/filter';
+import { Filter, NULL_FILTER } from '@interfaces/filter';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,10 +9,10 @@ import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 })
 export class FilterService {
 
-  private currentFilter$ = new BehaviorSubject<Filter>({key: 'name', value: ''});
+  private currentFilter$ = new BehaviorSubject<Filter>(NULL_FILTER);
 
-  addFilter(key: string, value: string) {
-    this.currentFilter$.next({ key, value });
+  addFilter(attribute: string, value: string[]) {
+    this.currentFilter$.next({ attribute, value });
   }
 
   applyIn(observer: BehaviorSubject<Collection<Employee>>): Observable<Collection<Employee>> {
@@ -27,9 +27,14 @@ export class FilterService {
   }
 
   private matchesFilter(employee: Employee, filter: Filter): boolean {
-    const attributeValue = employee[filter.key as keyof Employee];
+    const attributeValue = employee[filter.attribute as keyof Employee];
     return attributeValue
-      ? attributeValue.toString().toLowerCase().includes(filter.value.toLowerCase())
+      ? filter.value.some((value) => this.matchesFilterValue(value, attributeValue as string))
       : false;
   }
+  
+  private matchesFilterValue(filterValue: string, attributeValue: string): boolean {
+    return attributeValue.toLowerCase().includes(filterValue.toLowerCase());
+  }
+  
 }

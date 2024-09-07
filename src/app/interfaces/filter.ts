@@ -1,4 +1,6 @@
 export interface Filter {
-  key: string;
-  value: string;
+  attribute: string;
+  value: string[];
 }
+
+export const NULL_FILTER: Filter = { attribute: 'name', value: [''] };

@@ -15,7 +15,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(private readonly employeeService: EmployeeService, private readonly filterService: FilterService){}
 
-  private sub$: Subscription | undefined;
+  private subs$: Subscription[] = [];
 
   protected searchType = new FormControl('name');
   protected search = new FormControl('');
@@ -69,16 +69,16 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     
-    this.searchType.valueChanges.subscribe(() => this.search.reset(''));
+    this.subs$.push(this.searchType.valueChanges.subscribe(() => this.search.reset('')));
 
-    this.sub$ = combineLatest([
+    this.subs$.push(combineLatest([
       this.type$, 
       this.search.valueChanges.pipe(startWith(''), debounceTime(300))
     ])
-    .subscribe(([key, value]) => this.filterService.addFilter(key || 'name', value || ''));
+    .subscribe(([key, value]) => this.filterService.addFilter(key || 'name', [value || ''])));
   }
     
   ngOnDestroy(): void {
-    this.sub$?.unsubscribe();
+    this.subs$.forEach(sub$ => sub$.unsubscribe());
   }
 }
