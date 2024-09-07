@@ -1,49 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
 import { EmployeeService } from '@services/employee.service';
-import { map, shareReplay } from 'rxjs';
+import { FilterService } from '@services/filter.service';
+import { map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
   styleUrls: ['./filters.component.scss']
 })
-export class FiltersComponent implements OnInit {
+export class FiltersComponent implements OnInit, OnDestroy {
 
-  protected departments = new FormControl('');
-  protected roles = new FormControl('');
+  protected departments = new FormControl<string[]>([]);
+  protected roles = new FormControl<string[]>([]);
 
-  private employees$ = this.employeeService.read().pipe(shareReplay(1));
+  private employees$: Observable<Collection<Employee>> = this.employeeService.read();
 
-  protected departmentList$ = this.employees$.pipe(map(this.extractDepartmentList));
-  protected roleList$ = this.employees$.pipe(map(this.extractRoleList));
+  protected departmentList$: Observable<string[]> = this.employees$.pipe(map(this.extractList('department')));
+  protected roleList$: Observable<string[]> = this.employees$.pipe(map(this.extractList('role')));
 
-  constructor(private readonly employeeService: EmployeeService) { }
+  private subscriptions: Subscription = new Subscription();
+
+  constructor(private readonly employeeService: EmployeeService, private readonly filterService: FilterService) { }
+
+  private extractList(key: keyof Employee): (collection: Collection<Employee>) => string[] {
+    return (collection: Collection<Employee>) => 
+      Array.from(new Set(collection.data.map(e => e[key] as string)));
+  }
 
   ngOnInit(): void {
     this.setupFormControlsSync();
   }
 
+  
   private setupFormControlsSync(): void {
-    this.departments.valueChanges.subscribe(this.setFormValue(this.roles));
-    this.roles.valueChanges.subscribe(this.setFormValue(this.departments));
+    const syncDepartments = this.syncFilterControl(this.departments, 'department');
+    const syncRoles = this.syncFilterControl(this.roles, 'role');
+    
+    this.subscriptions.add(syncDepartments);
+    this.subscriptions.add(syncRoles);
   }
+  
 
-  private setFormValue(formControl: FormControl<string | null>): (value: string | null) => void {
-    return (value) => {
-      if (value) {
-        formControl.setValue('');
+  private syncFilterControl(
+    sourceControl: FormControl<string[] | null>, 
+    filterKey: string
+  ): Subscription {
+    return sourceControl.valueChanges.subscribe(this.applyFilter(filterKey));
+  }
+  
+  private applyFilter(attribute: string){
+    return (value: string[] | null) => {
+      if (value && value.length > 0) {
+        this.filterService.setFilter(attribute, value);
+      } else {
+        this.filterService.clearFilter(attribute);
       }
-    }
+    };
   }
 
-  private extractDepartmentList(collection: Collection<Employee>): string[] {
-    return Array.from(new Set(collection.data.map(e => e.department)));
-  }
-
-  private extractRoleList(collection: Collection<Employee>): string[] {
-    return Array.from(new Set(collection.data.map(e => e.role)));
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

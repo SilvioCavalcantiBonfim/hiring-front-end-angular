@@ -75,7 +75,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.type$, 
       this.search.valueChanges.pipe(startWith(''), debounceTime(300))
     ])
-    .subscribe(([key, value]) => this.filterService.addFilter(key || 'name', [value || ''])));
+    .subscribe(([key, value]) => this.filterService.setFilter(key || 'name', [value || ''])));
   }
     
   ngOnDestroy(): void {

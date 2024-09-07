@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
-import { Filter, NULL_FILTER } from '@interfaces/filter';
+import { Filter } from '@interfaces/filter';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,14 +9,16 @@ import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 })
 export class FilterService {
 
-  private currentFilter$ = new BehaviorSubject<Filter>(NULL_FILTER);
+  private activeFilters$ = new BehaviorSubject<Filter>({});
 
-  addFilter(attribute: string, value: string[]) {
-    this.currentFilter$.next({ attribute, value });
+  setFilter(filterName: string, value: string[]) {
+    const currentFilters = this.activeFilters$.value;
+    currentFilters[filterName] = value;
+    this.activeFilters$.next(currentFilters);
   }
 
-  applyIn(observer: BehaviorSubject<Collection<Employee>>): Observable<Collection<Employee>> {
-    return combineLatest([this.currentFilter$, observer]).pipe(
+  applyFiltersToCollection(observer: BehaviorSubject<Collection<Employee>>): Observable<Collection<Employee>> {
+    return combineLatest([this.activeFilters$, observer]).pipe(
       map(([filter, collection]) => this.filterCollection(filter, collection))
     );
   }
@@ -26,15 +28,24 @@ export class FilterService {
     return { ...collection, data: filteredData };
   }
 
-  private matchesFilter(employee: Employee, filter: Filter): boolean {
-    const attributeValue = employee[filter.attribute as keyof Employee];
-    return attributeValue
-      ? filter.value.some((value) => this.matchesFilterValue(value, attributeValue as string))
-      : false;
+  private matchesFilter(employee: Employee, filters: Filter): boolean {
+    return Object.entries(filters).every(([filterKey, filterValues]) => {
+      const employeeAttribute = employee[filterKey as keyof Employee];
+      if (!employeeAttribute) return false;
+      return this.matchesAnyFilterValue(filterValues, employeeAttribute as string);
+    });
   }
   
-  private matchesFilterValue(filterValue: string, attributeValue: string): boolean {
-    return attributeValue.toLowerCase().includes(filterValue.toLowerCase());
+  private matchesAnyFilterValue(filterValues: string[], employeeAttributeValue: string): boolean {
+    return filterValues.some(filterValue => 
+      employeeAttributeValue.toLowerCase().includes(filterValue.toLowerCase())
+    );
   }
-  
+
+  clearFilter(filterName: string): void {
+    const currentFilters = this.activeFilters$.value;
+    delete currentFilters[filterName];
+    this.activeFilters$.next(currentFilters);
+  }
+
 }

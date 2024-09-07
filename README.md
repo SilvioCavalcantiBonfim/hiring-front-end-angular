@@ -15,9 +15,9 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 [X]	Um registro pode ser excluído apenas se o usuário confirmar a ação (ex: através de um modal de confirmação).
 
-[ ]	A tabela deve permitir filtrar por department e role.
+[X]	A tabela deve permitir filtrar por department e role.
 
-[ ]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
+[X]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
 
 [ ]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
 

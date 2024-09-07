@@ -11,7 +11,7 @@ import { FilterService } from './filter.service';
 })
 export class EmployeeService {
 
-  private employeeCollection$ = new BehaviorSubject({ "data": [] } as Collection<Employee>);
+  private employeeCollection$ = new BehaviorSubject<Collection<Employee>>({ data: [] });
 
   constructor(private readonly identifier: IdentifierService, private filterService: FilterService) { }
 
@@ -29,7 +29,7 @@ export class EmployeeService {
   
 
   read(): Observable<Collection<Employee>> {
-    return this.filterService.applyIn(this.employeeCollection$).pipe(distinct());
+    return this.filterService.applyFiltersToCollection(this.employeeCollection$).pipe(distinct());
   }
 
   update(id: number, updatedData: EmployeeUpdateInput): void {
