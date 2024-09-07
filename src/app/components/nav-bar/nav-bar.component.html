@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <span>{{ title }}</span>
   <span class="spacer"></span>
-  <button mat-icon-button aria-label="Baixar CSV">
+  <button mat-icon-button aria-label="Baixar CSV" [disabled]="buttonStatus$ | async" #download>
     <mat-icon>download</mat-icon>
   </button>
   <button mat-icon-button aria-label="Adicionar novos funcionarios" (click)="onCreate()">

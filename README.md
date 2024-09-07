@@ -23,9 +23,9 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 [ ]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
 
-[ ]	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
+[X]	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
 
-[ ]	O CSV deve incluir apenas os registros da página atual se a paginação estiver ativa.
+[X]	O CSV deve incluir apenas os registros da página atual se a paginação estiver ativa.
 
 
 ## Referências
