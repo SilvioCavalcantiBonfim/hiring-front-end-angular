@@ -7,7 +7,6 @@ import { EmployeeInput } from '@interfaces/employee';
 import { DateService } from '@services/date/date.service';
 
 @Component({
-  selector: 'app-create-dialog',
   templateUrl: './create-dialog.component.html',
   styleUrls: ['./create-dialog.component.scss'],
   providers: [

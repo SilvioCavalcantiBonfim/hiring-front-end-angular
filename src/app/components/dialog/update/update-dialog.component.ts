@@ -7,7 +7,6 @@ import { Employee, EmployeeUpdateInput } from '@interfaces/employee';
 import { DateService } from '@services/date/date.service';
 
 @Component({
-  selector: 'app-update-dialog',
   templateUrl: './update-dialog.component.html',
   styleUrls: ['./update-dialog.component.scss'],
   providers: [
