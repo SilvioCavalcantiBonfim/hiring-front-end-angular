@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
 import { Filter } from '@interfaces/filter';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, map, OperatorFunction } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,15 @@ export class FilterService {
 
   setFilter(filterName: string, value: string[], relative = true) {
     const currentFilters = this.activeFilters$.value;
-    currentFilters[filterName] = {args: value, relative: relative};
+    currentFilters[filterName] = { args: value, relative: relative };
     this.activeFilters$.next(currentFilters);
   }
 
-  applyFiltersToCollection(observer: BehaviorSubject<Collection<Employee>>): Observable<Collection<Employee>> {
-    return combineLatest([this.activeFilters$, observer]).pipe(
-      map(([filter, collection]) => this.filterCollection(filter, collection))
-    );
+  applyFilters(): OperatorFunction<Collection<Employee>, Collection<Employee>> {
+    return (source: Observable<Collection<Employee>>) => 
+      combineLatest([this.activeFilters$, source]).pipe(
+        map(([filters, collection]) => this.filterCollection(filters, collection))
+      );
   }
 
   private filterCollection(filter: Filter, collection: Collection<Employee>): Collection<Employee> {
@@ -38,13 +39,12 @@ export class FilterService {
   
   private matchesAnyFilterValue(filterValues: string[], employeeAttributeValue: string, relative: boolean): boolean {
     return filterValues.some(filterValue => {
-      if(relative){
+      if (relative) {
         return employeeAttributeValue.toLowerCase().includes(filterValue.toLowerCase());
-      }else{
+      } else {
         return employeeAttributeValue.toLowerCase() === filterValue.toLowerCase();
       }
-    }
-    );
+    });
   }
 
   clearFilter(filterName: string): void {

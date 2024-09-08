@@ -17,6 +17,7 @@ import { SearchComponent } from './components/search/search.component';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { MainComponent } from './pages/main/main.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SortableColumnComponent } from './components/sortable-column/sortable-column.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
     FiltersComponent,
     SearchComponent,
     PaginatorComponent,
-    MainComponent
+    MainComponent,
+    SortableColumnComponent
   ],
   imports: [
     BrowserModule,

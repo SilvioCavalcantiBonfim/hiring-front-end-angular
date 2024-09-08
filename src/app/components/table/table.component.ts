@@ -3,9 +3,11 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '@components/delete-dialog/delete-dialog.component';
 import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.component';
+import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
 import { EmployeeService } from '@services/employee.service';
 import { PaginatorService } from '@services/paginator.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -14,14 +16,17 @@ import { PaginatorService } from '@services/paginator.service';
 })
 export class TableComponent {
 
+  protected readonly currentEmployee$: Observable<Collection<Employee>>;
+
   constructor(
     private employeeService: EmployeeService, 
-    private paginatorService: PaginatorService,
+    paginatorService: PaginatorService,
     private dialog: MatDialog, 
     private bottomSheet: MatBottomSheet
-  ) { }
+  ) { 
+    this.currentEmployee$ = employeeService.read().pipe(paginatorService.applyPaginator());
+  }
 
-  protected currentEmployee$ = this.paginatorService.applyPaginatorToCollection(this.employeeService.read());
 
   openDeleteDialog(employee: Employee): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {

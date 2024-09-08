@@ -5,6 +5,7 @@ import { Employee, EmployeeInput, EmployeeUpdateInput } from '@interfaces/employ
 import { IdentifierService } from '@services/identifier/identifier.service';
 import { Collection } from '@interfaces/collection';
 import { FilterService } from './filter.service';
+import { SorterService } from './sorter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -104,7 +105,11 @@ export class EmployeeService {
         "dateJoined": "2023-01-10"
       }]});
 
-  constructor(private readonly identifier: IdentifierService, private filterService: FilterService) { }
+  constructor(
+    private readonly identifier: IdentifierService, 
+    private filterService: FilterService,
+    private sortedService: SorterService
+  ) { }
 
   create(employee: EmployeeInput): void {
     const currentCollection = this.employeeCollection$.value;
@@ -123,7 +128,11 @@ export class EmployeeService {
   }
 
   read(): Observable<Collection<Employee>> {
-    return this.filterService.applyFiltersToCollection(this.employeeCollection$).pipe(distinct());
+    return this.employeeCollection$.pipe(
+      distinct(), 
+      this.filterService.applyFilters(),
+      this.sortedService.applySort()
+    );
   }
 
   update(id: number, updatedData: EmployeeUpdateInput): void {

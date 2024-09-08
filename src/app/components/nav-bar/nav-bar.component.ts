@@ -31,7 +31,7 @@ export class NavBarComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     fromEvent(this.downloadButton.nativeElement, 'click')
     .pipe(
-      withLatestFrom(this.paginatorService.applyPaginatorToCollection(this.employeeService.read()))
+      withLatestFrom(this.employeeService.read().pipe(this.paginatorService.applyPaginator()))
     )
     .subscribe((event) => {
       return this.csvService.download(event[1]);
