@@ -16,4 +16,12 @@ export class SortableColumnComponent {
   onClick(): void{
     this.shortedService.setSort(this.columnName);
   }
+
+  enabledIcon(): boolean{
+    return this.columnName == this.shortedService.getColumn();
+  }
+
+  nameIcon(): string{
+    return this.shortedService.getSort()? 'arrow_upward' : 'arrow_downward'
+  }
 }

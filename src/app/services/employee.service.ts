@@ -107,9 +107,13 @@ export class EmployeeService {
 
   constructor(
     private readonly identifier: IdentifierService, 
-    private filterService: FilterService,
-    private sortedService: SorterService
-  ) { }
+    private readonly filterService: FilterService,
+    private readonly sortedService: SorterService
+  ) { 
+    const maxIndex = Math.max(...this.employeeCollection$.value.data.map(e => e.id));
+
+    identifier.set(maxIndex+1);
+  }
 
   create(employee: EmployeeInput): void {
     const currentCollection = this.employeeCollection$.value;
