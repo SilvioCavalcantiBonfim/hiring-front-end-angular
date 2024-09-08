@@ -2,6 +2,7 @@ import { Component, HostListener, Input } from '@angular/core';
 import { SorterService } from '@services/sorter.service';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'th[appTableSortableColumn]',
   templateUrl: './sortable-column.component.html',
   styleUrls: ['./sortable-column.component.scss']
