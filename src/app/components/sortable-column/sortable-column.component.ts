@@ -1,5 +1,5 @@
 import { Component, HostListener, Input } from '@angular/core';
-import { SorterService } from '@services/sorter.service';
+import { SorterService } from '@services/sorter/sorter.service';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

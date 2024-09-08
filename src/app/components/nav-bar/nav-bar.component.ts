@@ -3,9 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { CreateDialogComponent } from '@components/dialog/create/create-dialog.component';
 import { EmployeeInput } from '@interfaces/employee';
-import { CsvService } from '@services/csv.service';
-import { EmployeeService } from '@services/employee.service';
-import { PaginatorService } from '@services/paginator.service';
+import { CsvService } from '@services/csv/csv.service';
+import { EmployeeService } from '@services/employee/employee.service';
+import { PaginatorService } from '@services/paginator/paginator.service';
 import { fromEvent, withLatestFrom } from 'rxjs';
 
 @Component({

@@ -5,8 +5,8 @@ import { DeleteDialogComponent } from '@components/dialog/delete/delete-dialog.c
 import { UpdateDialogComponent } from '@components/dialog/update/update-dialog.component';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
-import { EmployeeService } from '@services/employee.service';
-import { PaginatorService } from '@services/paginator.service';
+import { EmployeeService } from '@services/employee/employee.service';
+import { PaginatorService } from '@services/paginator/paginator.service';
 import { Observable } from 'rxjs';
 
 @Component({

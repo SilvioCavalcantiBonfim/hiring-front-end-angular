@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
-import { EmployeeService } from '@services/employee.service';
-import { FilterService } from '@services/filter.service';
+import { EmployeeService } from '@services/employee/employee.service';
+import { FilterService } from '@services/filter/filter.service';
 import { map, Observable, Subscription } from 'rxjs';
 
 @Component({

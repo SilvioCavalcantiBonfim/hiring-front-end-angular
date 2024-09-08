@@ -4,8 +4,8 @@ import { BehaviorSubject, distinct, Observable } from 'rxjs';
 import { Employee, EmployeeInput, EmployeeUpdateInput } from '@interfaces/employee';
 import { IdentifierService } from '@services/identifier/identifier.service';
 import { Collection } from '@interfaces/collection';
-import { FilterService } from './filter.service';
-import { SorterService } from './sorter.service';
+import { FilterService } from '../filter/filter.service';
+import { SorterService } from '../sorter/sorter.service';
 
 @Injectable({
   providedIn: 'root'

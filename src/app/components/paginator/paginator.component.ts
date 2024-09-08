@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
-import { EmployeeService } from '@services/employee.service';
-import { PaginatorService } from '@services/paginator.service';
+import { EmployeeService } from '@services/employee/employee.service';
+import { PaginatorService } from '@services/paginator/paginator.service';
 import { map } from 'rxjs';
 
 @Component({

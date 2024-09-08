@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Dictionary } from '@interfaces/dictionary';
 import { Employee } from '@interfaces/employee';
-import { EmployeeService } from '@services/employee.service';
-import { FilterService } from '@services/filter.service';
+import { EmployeeService } from '@services/employee/employee.service';
+import { FilterService } from '@services/filter/filter.service';
 import { combineLatest, debounceTime, map, startWith, Subscription } from 'rxjs';
 
 @Component({
