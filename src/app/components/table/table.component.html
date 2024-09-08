@@ -1,12 +1,12 @@
 <table class="main-table">
   <tr>
-    <th appTableSortableColumn columnName="id">N</th>
-    <th appTableSortableColumn columnName="name">Nome</th>
-    <th appTableSortableColumn columnName="email">email</th>
-    <th appTableSortableColumn columnName="phone">Contato</th>
-    <th appTableSortableColumn columnName="department">Departamento</th>
-    <th appTableSortableColumn columnName="role">Cargo</th>
-    <th appTableSortableColumn columnName="dateJoined">data de Admissão</th>
+    <th appTableSortableColumn columnName="id" matTooltip="Ordenar por ID">N</th>
+    <th appTableSortableColumn columnName="name" matTooltip="Ordenar por mome">Nome</th>
+    <th appTableSortableColumn columnName="email" matTooltip="Ordenar por E-mail">E-mail</th>
+    <th appTableSortableColumn columnName="phone" matTooltip="Ordenar por contato">Contato</th>
+    <th appTableSortableColumn columnName="department" matTooltip="Ordenar por departamento">Departamento</th>
+    <th appTableSortableColumn columnName="role" matTooltip="Ordenar por cargo">Cargo</th>
+    <th appTableSortableColumn columnName="dateJoined" matTooltip="Ordenar por data de admissão">Data de Admissão</th>
     <th>Ação</th>
   </tr>
   <ng-container *ngTemplateOutlet="main; context: {employees: currentEmployee$ | async}" />
@@ -20,10 +20,10 @@
     <td>{{employee.role}}</td>
     <td>{{employee.dateJoined | date: 'dd/MM/yyyy'}}</td>
     <td>
-      <button mat-icon-button color="primary" (click)="openUpdateSheet(employee)">
+      <button mat-icon-button color="primary" matTooltip="Atualizar cadastro" (click)="openUpdateSheet(employee)">
         <mat-icon class="icon">edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn" (click)="openDeleteDialog(employee)">
+      <button mat-icon-button color="warn" matTooltip="excluir cadastro" (click)="openDeleteDialog(employee)">
         <mat-icon class="icon">person_remove</mat-icon>
       </button>
     </td>

@@ -1,20 +1,20 @@
 <mat-button-toggle-group [formControl]="searchType">
-  <mat-button-toggle value="name">Nome</mat-button-toggle>
-  <mat-button-toggle value="email">Email</mat-button-toggle>
-  <mat-button-toggle value="phone">Contato</mat-button-toggle>
+  <mat-button-toggle matTooltip="Buscar por nome" value="name">Nome</mat-button-toggle>
+  <mat-button-toggle matTooltip="Buscar por E-mail" value="email">E-mail</mat-button-toggle>
+  <mat-button-toggle matTooltip="Buscar por contato" value="phone">Contato</mat-button-toggle>
 </mat-button-toggle-group>
 
 <ng-container *ngIf="currentType$ | async as type; else loading">
   <ng-container *ngIf="options$ | async as options">
     <mat-form-field appearance="outline">
       <mat-label>Buscar por {{type.name}}...</mat-label>
-      <input type="text" aria-label="Search" matInput [matAutocomplete]="auto" [formControl]="search">
+      <input type="text" aria-label="Search" [matTooltip]="'Buscar por '+type.name" matInput [matAutocomplete]="auto" [formControl]="search">
 
       <mat-icon matPrefix>{{ type.ico }}</mat-icon>
       <mat-icon matSuffix *ngIf="isEmpty() else searchIco">search</mat-icon>
       
       <ng-template #searchIco>
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="search.reset('')">
+        <button matSuffix mat-icon-button matTooltip="Limpar campo" aria-label="Clear" (click)="search.reset('')">
           <mat-icon>close</mat-icon>
         </button>
       </ng-template>

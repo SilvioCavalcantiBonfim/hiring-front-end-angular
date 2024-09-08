@@ -1,14 +1,22 @@
 <mat-toolbar color="primary">
   <span>{{ title }}</span>
   <span class="spacer"></span>
-  <button mat-icon-button aria-label="Carregar Json" (click)="upload.click()">
+  <button 
+    mat-icon-button 
+    aria-label="Carregar Json" 
+    (click)="upload.click()"
+    matTooltip="Carregar dados de um CSV ou JSON"
+  >
     <mat-icon>upload</mat-icon>
     <input type="file" #upload accept=".json,.csv"/>
   </button>
-  <button mat-icon-button aria-label="Baixar CSV" #download>
+  <button 
+    mat-icon-button aria-label="Baixar CSV" #download
+    matTooltip="Exportar dados em CSV"
+    >
     <mat-icon>download</mat-icon>
   </button>
-  <button mat-icon-button aria-label="Adicionar novos funcionarios" (click)="onCreate()">
+  <button mat-icon-button aria-label="Adicionar novos funcionarios" matTooltip="Cadastrar novo funcionarios" (click)="onCreate()">
     <mat-icon>person_add</mat-icon>
   </button>
 </mat-toolbar>

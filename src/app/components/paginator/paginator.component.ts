@@ -12,7 +12,7 @@ import { map } from 'rxjs';
 })
 export class PaginatorComponent implements OnInit {
 
-  enabledPaginator = new FormControl<boolean>(true);
+  protected enabledPaginator = new FormControl<boolean>(true);
 
   protected length$ = this.employeeService.read().pipe(map(collection => collection.data.length));
 
