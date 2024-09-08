@@ -19,7 +19,8 @@
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Contato</mat-label>
-        <input matInput placeholder="Contato..." formControlName="phone" mask="+0 000-000-0000">
+        <input matInput placeholder="Contato..." formControlName="phone" mask="+0 000-000-0000"
+          [dropSpecialCharacters]="false">
         <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
     </p>
@@ -45,7 +46,7 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </p>
-  
+
     <div class="action" mat-dialog-actions>
       <button mat-flat-button color="primary" [disabled]="updateEmployeeForm.invalid">
         <mat-icon>save</mat-icon>

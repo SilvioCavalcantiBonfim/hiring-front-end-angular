@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { CreateDialogComponent } from '@components/create-dialog/create-dialog.component';
+import { CreateDialogComponent } from '@components/dialog/create/create-dialog.component';
 import { EmployeeInput } from '@interfaces/employee';
 import { CsvService } from '@services/csv.service';
 import { EmployeeService } from '@services/employee.service';
@@ -31,7 +31,9 @@ export class NavBarComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     fromEvent(this.downloadButton.nativeElement, 'click')
     .pipe(
-      withLatestFrom(this.employeeService.read().pipe(this.paginatorService.applyPaginator()))
+      withLatestFrom(
+        this.employeeService.read()
+        .pipe(this.paginatorService.applyPaginator()))
     )
     .subscribe((event) => {
       return this.csvService.download(event[1]);

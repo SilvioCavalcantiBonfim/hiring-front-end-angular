@@ -19,7 +19,7 @@ Dar um fork no projeto, clonar o repositório em sua máquina local e criar um b
 
 [X]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
 
-[ ]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
+[X]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
 
 [X]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
 

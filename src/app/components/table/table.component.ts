@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
-import { DeleteDialogComponent } from '@components/delete-dialog/delete-dialog.component';
-import { UpdateDialogComponent } from '@components/update-dialog/update-dialog.component';
+import { DeleteDialogComponent } from '@components/dialog/delete/delete-dialog.component';
+import { UpdateDialogComponent } from '@components/dialog/update/update-dialog.component';
 import { Collection } from '@interfaces/collection';
 import { Employee } from '@interfaces/employee';
 import { EmployeeService } from '@services/employee.service';
