@@ -6,20 +6,24 @@ import { IdentifierService } from '@services/identifier/identifier.service';
 import { Collection } from '@interfaces/collection';
 import { FilterService } from '../filter/filter.service';
 import { SorterService } from '../sorter/sorter.service';
+import { LocalStorageService } from '@services/storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-  private employeeCollection$ = new BehaviorSubject<Collection<Employee>>({
-    data: []});
+  private readonly employeeCollection$: BehaviorSubject<Collection<Employee>>;
 
   constructor(
     private readonly identifier: IdentifierService, 
     private readonly filterService: FilterService,
-    private readonly sortedService: SorterService
+    private readonly sortedService: SorterService,
+    private readonly storageService: LocalStorageService
   ) { 
+    this.employeeCollection$ = new BehaviorSubject<Collection<Employee>>({
+      data: []});
+    storageService.loadDataStorage().forEach(employee => this.create(employee));
   }
 
   create(employee: EmployeeInput): void {
@@ -35,7 +39,7 @@ export class EmployeeService {
   }
 
   rawRead(): Observable<Collection<Employee>> {
-    return this.employeeCollection$.pipe(distinct());
+    return this.employeeCollection$.pipe(distinct(), this.storageService.updateStorage());
   }
 
   read(): Observable<Collection<Employee>> {
