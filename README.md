@@ -1,151 +1,83 @@
+# Documentação do Projeto
 
-## Objetivo
-Desenvolva uma tabela que carrega dados de um JSON. A tabela deve permitir a edição, adição e exclusão de linhas. Os dados modificados devem ser refletidos no JSON local.
+## Visão Geral
 
-## Como começar
-Dar um fork no projeto, clonar o repositório em sua máquina local e criar um branch novo para o seu código.
+Este projeto é uma aplicação web desenvolvida em Angular para gerenciar uma tabela de registros a partir de um JSON local. A tabela oferece funcionalidades para adicionar, editar e excluir registros, além de permitir filtragem, busca, ordenação, paginação e exportação para CSV. Além disso, a aplicação foi estendida com a funcionalidade adicional de fazer upload de arquivos JSON e CSV.
 
+## Requisitos
 
-## Regras de negócio
-[X]	Novos registros devem conter todos os campos obrigatórios (name, email, phone, department, role, dateJoined).
+- **Node.js**: Versão 18.19.0 ou superior
+- **NPM**: Gerenciador de pacotes
 
-[X]	O campo id deve ser gerado automaticamente ao adicionar um novo registro.
+## Instalação e Configuração
 
-[X]	Qualquer campo de um registro existente pode ser editado, exceto o id.
+### 1. Instalação do Node.js e NPM
 
-[X]	Um registro pode ser excluído apenas se o usuário confirmar a ação (ex: através de um modal de confirmação).
+Certifique-se de ter o [Node.js](https://nodejs.org/) instalado na sua máquina. A instalação do Node.js inclui o NPM (Node Package Manager). Para verificar a versão instalada, use:
 
-[X]	A tabela deve permitir filtrar por department e role.
-
-[X]	O sistema deve permitir a busca de registros pelo name, email, ou phone.
-
-[X]	A ordenação pode ser feita por qualquer campo, em ordem crescente ou decrescente.
-
-[X]	A tabela deve suportar paginação, exibindo no máximo 5 registros por página.
-
-[X]	O usuário deve poder exportar os registros visíveis em um arquivo CSV.
-
-[X]	O CSV deve incluir apenas os registros da página atual se a paginação estiver ativa.
-
-
-## Referências
-•	JSON de referência:
-
-```
-{
-  "data": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "phone": "+1 555-555-5555",
-      "department": "Sales",
-      "role": "Sales Manager",
-      "dateJoined": "2022-01-15"
-    },
-    {
-      "id": 2,
-      "name": "Jane Smith",
-      "email": "jane.smith@example.com",
-      "phone": "+1 555-123-4567",
-      "department": "Engineering",
-      "role": "Software Engineer",
-      "dateJoined": "2023-03-22"
-    },
-    {
-      "id": 3,
-      "name": "Michael Brown",
-      "email": "michael.brown@example.com",
-      "phone": "+1 555-987-6543",
-      "department": "Marketing",
-      "role": "Marketing Coordinator",
-      "dateJoined": "2021-07-30"
-    },
-    {
-      "id": 4,
-      "name": "Emily Davis",
-      "email": "emily.davis@example.com",
-      "phone": "+1 555-654-3210",
-      "department": "Human Resources",
-      "role": "HR Specialist",
-      "dateJoined": "2020-11-05"
-    },
-    {
-      "id": 5,
-      "name": "William Johnson",
-      "email": "william.johnson@example.com",
-      "phone": "+1 555-321-4321",
-      "department": "Finance",
-      "role": "Financial Analyst",
-      "dateJoined": "2019-02-19"
-    },
-    {
-      "id": 6,
-      "name": "Olivia Taylor",
-      "email": "olivia.taylor@example.com",
-      "phone": "+1 555-789-1234",
-      "department": "Customer Support",
-      "role": "Support Specialist",
-      "dateJoined": "2021-05-18"
-    },
-    {
-      "id": 7,
-      "name": "James Wilson",
-      "email": "james.wilson@example.com",
-      "phone": "+1 555-456-7890",
-      "department": "IT",
-      "role": "System Administrator",
-      "dateJoined": "2022-09-12"
-    },
-    {
-      "id": 8,
-      "name": "Sophia Martinez",
-      "email": "sophia.martinez@example.com",
-      "phone": "+1 555-654-9876",
-      "department": "Legal",
-      "role": "Legal Advisor",
-      "dateJoined": "2020-02-24"
-    },
-    {
-      "id": 9,
-      "name": "David Lee",
-      "email": "david.lee@example.com",
-      "phone": "+1 555-321-8765",
-      "department": "Operations",
-      "role": "Operations Manager",
-      "dateJoined": "2018-08-03"
-    },
-    {
-      "id": 10,
-      "name": "Ava White",
-      "email": "ava.white@example.com",
-      "phone": "+1 555-654-4321",
-      "department": "Product",
-      "role": "Product Manager",
-      "dateJoined": "2023-01-10"
-    }
-  ]
-}
+```bash
+node -v
+npm -v
 ```
 
+### 2. Clonando o Repositório
 
-## Observações
-1. Utilizar Angular na versão 15.
-2. Utilização de typescript.
-3. Design de livre escolha.
+Faça um fork deste repositório no GitHub e clone-o para sua máquina local:
 
+```bash
+git clone https://github.com/SilvioCavalcantiBonfim/hiring-front-end-angular.git
+```
 
-## Requisitos Técnicos para a entrega do teste
+Navegue até o diretório do projeto:
 
-•	Utilizar SASS
+```bash
+cd hiring-front-end-angular
+```
 
-•	O projeto deve ter uma documentação em readme ensinando a: 
-1. instalar o projeto na máquina (engines, versão de node, qual gerenciador de pacote usar)
-2. instalar as dependências do projeto
-3. rodar o ambiente de desenvolvimento
-4. rodar a build de deploy da aplicação.
+### 3. Instalando Dependências
 
-•	Hospedar o projeto em um servidor (Heroku, Vercel, Netlify)
+Instale as dependências do projeto usando o `NPM`:
 
+```bash
+npm install
+```
 
-Boa sorte!
+### 4. Rodando o Ambiente de Desenvolvimento
+
+Para iniciar o ambiente de desenvolvimento e verificar a aplicação localmente, execute:
+
+```bash
+npm start
+```
+
+Isso iniciará o servidor de desenvolvimento e abrirá a aplicação em seu navegador padrão, geralmente em `http://localhost:4200`.
+
+### 5. Rodando a Build de Deploy
+
+Para criar uma build de produção otimizada, execute:
+
+```bash
+npm run build --configuration=production
+```
+
+Os arquivos gerados estarão na pasta `dist/hiring-front-end-angular` e podem ser hospedados em um servidor de sua escolha.
+
+## Funcionalidades
+
+- **Adição de Registros**: Permite adicionar novos registros com todos os campos obrigatórios. O campo `id` é gerado automaticamente.
+- **Edição de Registros**: Permite editar qualquer campo de um registro, exceto o `id`.
+- **Exclusão de Registros**: Permite excluir registros com confirmação do usuário via modal.
+- **Filtragem**: Permite filtrar registros por `department` e `role`.
+- **Busca**: Permite buscar registros por `name`, `email`, ou `phone`.
+- **Ordenação**: Permite ordenar a tabela por qualquer campo em ordem crescente ou decrescente.
+- **Paginação**: Suporta paginação com no máximo 5 registros por página.
+- **Exportação para CSV**: Permite exportar os registros visíveis na página atual para um arquivo CSV.
+- **Upload de Arquivos**: Adicionada funcionalidade para fazer upload de arquivos JSON e CSV. Essa funcionalidade permite importar registros diretamente para a tabela a partir de arquivos, facilitando a integração com outros sistemas e a atualização dos dados.
+
+## Hospedagem
+
+Após a construção da aplicação, o projeto foi hospedado nos servidores da [Netlify](https://vnw-hiring.netlify.app/).
+
+## Conclusão
+
+Com essas instruções, você deve ser capaz de instalar, configurar, e executar a aplicação, além de gerar uma build de produção e hospedar a aplicação. Se tiver dúvidas ou precisar de assistência adicional abra uma issue no repositório GitHub.
