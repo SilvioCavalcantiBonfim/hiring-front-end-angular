@@ -18,6 +18,7 @@ import { MainComponent } from './pages/main/main.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SortableColumnComponent } from './components/sortable-column/sortable-column.component';
 import { DeleteDialogComponent } from '@components/dialog/delete/delete-dialog.component';
+import { NoRegisterComponent } from './components/no-register/no-register.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DeleteDialogComponent } from '@components/dialog/delete/delete-dialog.c
     SearchComponent,
     PaginatorComponent,
     MainComponent,
-    SortableColumnComponent
+    SortableColumnComponent,
+    NoRegisterComponent
   ],
   imports: [
     BrowserModule,

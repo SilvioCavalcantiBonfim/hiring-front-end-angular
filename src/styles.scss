@@ -45,6 +45,25 @@ $my-theme: mat.define-light-theme((
  )
 ));
 
+.no-register{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  svg{
+    fill: mat.get-color-from-palette($m2-primary, 300) !important;
+  }
+  h1{
+    font-weight: 500;
+    color: mat.get-color-from-palette($m2-primary, 300);
+  }
+  h4{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}
+
 .nav-container{
   background-color: mat.get-color-from-palette($m2-primary, 50);
   margin: auto;

@@ -1,5 +1,10 @@
 # Documentação do Projeto
 
+![angular](https://img.shields.io/badge/-Angular-white?style=for-the-badge&logo=angular&color=0F0F11&logoColor=white)
+![materialdesign](https://img.shields.io/badge/-material_design-white?style=for-the-badge&logo=materialdesign&color=757575&logoColor=white)
+![typescript](https://img.shields.io/badge/-typescript-white?style=for-the-badge&logo=typescript&color=3178C6&logoColor=white)
+
+
 ## Visão Geral
 
 Este projeto é uma aplicação web desenvolvida em Angular para gerenciar uma tabela de registros a partir de um JSON local. A tabela oferece funcionalidades para adicionar, editar e excluir registros, além de permitir filtragem, busca, ordenação, paginação e exportação para CSV. Além disso, a aplicação foi estendida com a funcionalidade adicional de fazer upload de arquivos JSON e CSV.
@@ -72,7 +77,7 @@ Os arquivos gerados estarão na pasta `dist/hiring-front-end-angular` e podem se
 - **Ordenação**: Permite ordenar a tabela por qualquer campo em ordem crescente ou decrescente.
 - **Paginação**: Suporta paginação com no máximo 5 registros por página.
 - **Exportação para CSV**: Permite exportar os registros visíveis na página atual para um arquivo CSV.
-- **Upload de Arquivos**: Adicionada funcionalidade para fazer upload de arquivos JSON e CSV. Essa funcionalidade permite importar registros diretamente para a tabela a partir de arquivos, facilitando a integração com outros sistemas e a atualização dos dados.
+- **Upload de Arquivos** *(Adicional)*: Permite fazer upload de arquivos JSON e CSV. Essa funcionalidade permite importar registros diretamente para a tabela a partir de arquivos, facilitando a integração com outros sistemas e a atualização dos dados.
 
 ## Hospedagem
 
@@ -80,4 +85,4 @@ Após a construção da aplicação, o projeto foi hospedado nos servidores da [
 
 ## Conclusão
 
-Com essas instruções, você deve ser capaz de instalar, configurar, e executar a aplicação, além de gerar uma build de produção e hospedar a aplicação. Se tiver dúvidas ou precisar de assistência adicional abra uma issue no repositório GitHub.
+Com essas instruções, você deve ser capaz de instalar, configurar, e executar a aplicação, além de gerar uma build de produção e hospedar a aplicação.

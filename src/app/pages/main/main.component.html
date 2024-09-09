@@ -1,8 +1,11 @@
 <main>
-  <nav class="nav-container">
-    <app-search/>
-    <app-filters/>
-  </nav>
-  <app-table></app-table>
-  <app-paginator/>
+  <ng-template #table>
+    <nav class="nav-container">
+      <app-search />
+      <app-filters />
+    </nav>
+    <app-table/>
+    <app-paginator />
+  </ng-template>
+  <app-no-register *ngIf="enabled() | async else table"/>
 </main>
